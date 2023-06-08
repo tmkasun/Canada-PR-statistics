@@ -8,7 +8,7 @@ import Statistics from "./components/Statistics";
 
 export default function App() {
   const [lineChartOptions, setLineChartOptions] = useState<null | EChartsOption>(null);
-  const { data, isLoading } = useIRCCData(true);
+  const { data, isLoading } = useIRCCData();
 
   return (
     <div className="App">
