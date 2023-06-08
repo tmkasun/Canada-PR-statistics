@@ -7,7 +7,9 @@ import useIRCCData, { clearAndParseNumber } from '../data/api';
 import { EChartsOption } from 'echarts';
 import dayjs from 'dayjs';
 import relativeTime from "dayjs/plugin/relativeTime";
+import calendar from "dayjs/plugin/calendar";
 dayjs.extend(relativeTime);
+dayjs.extend(calendar);
 
 type StatisticsProps = {
     onChange: (e: EChartsOption) => void;
@@ -240,12 +242,21 @@ function Statistics(props: StatisticsProps) {
                                 <div>Next Potential Draw:</div>
                                 <div
                                     className="statValue"
-                                    style={{
-                                        color: "red"
-                                    }}
                                 >
-                                    {lastRound &&
-                                        dayjs(lastRound?.drawDate).add(2.5, "week").fromNow()}
+                                    <span style={{
+                                        color: "red",
+                                        marginRight: '0.5rem'
+                                    }}>
+                                        {lastRound &&
+                                            dayjs(lastRound?.drawDate).add(2.5, "week").fromNow()}
+                                    </span>
+                                    <span>
+                                        (
+                                        {lastRound &&
+                                            dayjs(lastRound?.drawDate).add(2.5, "week").calendar()}
+                                        )
+
+                                    </span>
                                 </div>
                             </>
                         )}
@@ -275,7 +286,8 @@ function Statistics(props: StatisticsProps) {
 
                     </div>
                 </>
-            )}
+            )
+            }
         </>
     )
 }
