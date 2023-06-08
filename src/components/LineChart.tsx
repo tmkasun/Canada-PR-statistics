@@ -10,6 +10,7 @@ import {
 } from "echarts/components";
 import { LineChart } from "echarts/charts";
 import { CanvasRenderer } from "echarts/renderers";
+import { ECharts, EChartsOption, EChartsType } from "echarts";
 
 echarts.use([
   TitleComponent,
@@ -22,9 +23,9 @@ echarts.use([
   ToolboxComponent
 ]);
 
-const REChart = (props) => {
-  const chartRef = useRef(null);
-  const chartRefInst = useRef(null);
+const REChart: React.FC<{ id: string, options: EChartsOption }> = (props) => {
+  const chartRef = useRef<HTMLDivElement | null>(null);
+  const chartRefInst = useRef<ECharts | null>(null);
   const { id, options } = props;
   useEffect(() => {
     if (chartRefInst.current) {
@@ -38,7 +39,7 @@ const REChart = (props) => {
         echarts.getInstanceByDom(chartRef.current) ||
         echarts.init(chartRef.current);
       lineChart.setOption(options, true);
-      chartRefInst.current = lineChart;
+      chartRefInst.current = lineChart as unknown as EChartsType;
     }
   }, []);
   return (

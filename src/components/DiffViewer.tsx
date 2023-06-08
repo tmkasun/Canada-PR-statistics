@@ -1,6 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-export const DiffViewer = (props) => {
+export const DiffViewer: React.FC<{diff: number, invert?: boolean}> = (props) => {
   const [showHighTool, setShowHighTool] = useState(false);
   const [showLowTool, setShowLowTool] = useState(false);
   const { diff, invert = false } = props;

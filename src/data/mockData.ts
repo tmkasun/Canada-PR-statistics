@@ -36,7 +36,7 @@ export const data = {
       dd15: "67,331",
       dd16: "35,098",
       dd17: "5,455",
-      dd18: "226,842"
+      dd18: "226,842",
     },
     {
       drawNumber: "248",
@@ -72,7 +72,7 @@ export const data = {
       dd15: "67,883",
       dd16: "35,242",
       dd17: "5,470",
-      dd18: "225,388"
+      dd18: "225,388",
     },
     {
       drawNumber: "247",
@@ -109,7 +109,7 @@ export const data = {
       dd15: "69,709",
       dd16: "36,432",
       dd17: "5,585",
-      dd18: "230,189"
+      dd18: "230,189",
     },
     {
       drawNumber: "246",
@@ -146,7 +146,7 @@ export const data = {
       dd15: "69,975",
       dd16: "36,419",
       dd17: "5,573",
-      dd18: "231,119"
+      dd18: "231,119",
     },
     {
       drawNumber: "245",
@@ -183,7 +183,7 @@ export const data = {
       dd15: "71,304",
       dd16: "37,124",
       dd17: "5,711",
-      dd18: "234,947"
+      dd18: "234,947",
     },
     {
       drawNumber: "244",
@@ -220,7 +220,7 @@ export const data = {
       dd15: "71,424",
       dd16: "37,208",
       dd17: "5,681",
-      dd18: "240,146"
+      dd18: "240,146",
     },
     {
       drawNumber: "243",
@@ -257,7 +257,7 @@ export const data = {
       dd15: "71,292",
       dd16: "37,113",
       dd17: "5,650",
-      dd18: "245,121"
+      dd18: "245,121",
     },
     {
       drawNumber: "242",
@@ -293,7 +293,7 @@ export const data = {
       dd15: "71,529",
       dd16: "37,131",
       dd17: "5,706",
-      dd18: "243,374"
+      dd18: "243,374",
     },
     {
       drawNumber: "241",
@@ -329,7 +329,7 @@ export const data = {
       dd15: "70,932",
       dd16: "36,722",
       dd17: "5,596",
-      dd18: "240,264"
+      dd18: "240,264",
     },
     {
       drawNumber: "240",
@@ -365,7 +365,7 @@ export const data = {
       dd15: "70,484",
       dd16: "36,636",
       dd17: "5,502",
-      dd18: "239,415"
+      dd18: "239,415",
     },
     {
       drawNumber: "239",
@@ -401,7 +401,7 @@ export const data = {
       dd15: "70,484",
       dd16: "36,636",
       dd17: "5,502",
-      dd18: "239,415"
+      dd18: "239,415",
     },
     {
       drawNumber: "238",
@@ -438,7 +438,7 @@ export const data = {
       dd15: "70,421",
       dd16: "36,754",
       dd17: "5,519",
-      dd18: "240,013"
+      dd18: "240,013",
     },
     {
       drawNumber: "237",
@@ -475,7 +475,7 @@ export const data = {
       dd15: "70,204",
       dd16: "36,547",
       dd17: "5,469",
-      dd18: "243,255"
+      dd18: "243,255",
     },
     {
       drawNumber: "236",
@@ -512,7 +512,7 @@ export const data = {
       dd15: "68,489",
       dd16: "35,614",
       dd17: "5,252",
-      dd18: "232,215"
+      dd18: "232,215",
     },
     {
       drawNumber: "235",
@@ -549,7 +549,7 @@ export const data = {
       dd15: "68,711",
       dd16: "35,610",
       dd17: "5,087",
-      dd18: "233,619"
+      dd18: "233,619",
     },
     {
       drawNumber: "234",
@@ -586,7 +586,7 @@ export const data = {
       dd15: "69,192",
       dd16: "35,904",
       dd17: "5,108",
-      dd18: "234,981"
+      dd18: "234,981",
     },
     {
       drawNumber: "233",
@@ -623,7 +623,7 @@ export const data = {
       dd15: "68,680",
       dd16: "35,501",
       dd17: "5,055",
-      dd18: "235,120"
+      dd18: "235,120",
     },
     {
       drawNumber: "232",
@@ -660,7 +660,7 @@ export const data = {
       dd15: "69,175",
       dd16: "36,006",
       dd17: "5,112",
-      dd18: "237,423"
+      dd18: "237,423",
     },
     {
       drawNumber: "231",
@@ -697,7 +697,7 @@ export const data = {
       dd15: "68,857",
       dd16: "35,833",
       dd17: "5,068",
-      dd18: "238,273"
+      dd18: "238,273",
     },
     {
       drawNumber: "230",
@@ -734,7 +734,7 @@ export const data = {
       dd15: "68,974",
       dd16: "36,001",
       dd17: "5,120",
-      dd18: "239,196"
+      dd18: "239,196",
     },
     {
       drawNumber: "229",
@@ -771,7 +771,7 @@ export const data = {
       dd15: "68,440",
       dd16: "35,745",
       dd17: "5,137",
-      dd18: "238,947"
+      dd18: "238,947",
     },
     {
       drawNumber: "228",
@@ -808,7 +808,7 @@ export const data = {
       dd15: "68,325",
       dd16: "35,522",
       dd17: "5,145",
-      dd18: "238,924"
+      dd18: "238,924",
     },
     {
       drawNumber: "227",
@@ -845,7 +845,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "226",
@@ -882,7 +882,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "225",
@@ -918,7 +918,7 @@ export const data = {
       dd15: "64,478",
       dd16: "33,585",
       dd17: "4,919",
-      dd18: "220,674"
+      dd18: "220,674",
     },
     {
       drawNumber: "224",
@@ -954,7 +954,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "223",
@@ -990,7 +990,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "222",
@@ -1026,7 +1026,7 @@ export const data = {
       dd15: "62,341",
       dd16: "32,590",
       dd17: "4,839",
-      dd18: "211,093"
+      dd18: "211,093",
     },
     {
       drawNumber: "221",
@@ -1062,7 +1062,7 @@ export const data = {
       dd15: "60,456",
       dd16: "31,705",
       dd17: "4,866",
-      dd18: "203,773"
+      dd18: "203,773",
     },
     {
       drawNumber: "220",
@@ -1098,7 +1098,7 @@ export const data = {
       dd15: "59,500",
       dd16: "31,148",
       dd17: "4,911",
-      dd18: "200,924"
+      dd18: "200,924",
     },
     {
       drawNumber: "219",
@@ -1134,7 +1134,7 @@ export const data = {
       dd15: "59,500",
       dd16: "31,148",
       dd17: "4,911",
-      dd18: "200,924"
+      dd18: "200,924",
     },
     {
       drawNumber: "218",
@@ -1170,7 +1170,7 @@ export const data = {
       dd15: "58,456",
       dd16: "30,768",
       dd17: "5,084",
-      dd18: "196,692"
+      dd18: "196,692",
     },
     {
       drawNumber: "217",
@@ -1206,7 +1206,7 @@ export const data = {
       dd15: "58,253",
       dd16: "31,018",
       dd17: "5,313",
-      dd18: "195,895"
+      dd18: "195,895",
     },
     {
       drawNumber: "216",
@@ -1242,7 +1242,7 @@ export const data = {
       dd15: "59,011",
       dd16: "31,545",
       dd17: "5,736",
-      dd18: "198,061"
+      dd18: "198,061",
     },
     {
       drawNumber: "215",
@@ -1278,7 +1278,7 @@ export const data = {
       dd15: "59,039",
       dd16: "31,734",
       dd17: "5,834",
-      dd18: "197,660"
+      dd18: "197,660",
     },
     {
       drawNumber: "214",
@@ -1314,7 +1314,7 @@ export const data = {
       dd15: "58,692",
       dd16: "31,704",
       dd17: "5,799",
-      dd18: "196,685"
+      dd18: "196,685",
     },
     {
       drawNumber: "213",
@@ -1350,7 +1350,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "212",
@@ -1386,7 +1386,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "211",
@@ -1422,7 +1422,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "210",
@@ -1458,7 +1458,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "209",
@@ -1494,7 +1494,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "208",
@@ -1530,7 +1530,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "207",
@@ -1566,7 +1566,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "206",
@@ -1602,7 +1602,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "205",
@@ -1638,7 +1638,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "204",
@@ -1674,7 +1674,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "203",
@@ -1710,7 +1710,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "202",
@@ -1746,7 +1746,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "201",
@@ -1782,7 +1782,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "200",
@@ -1818,7 +1818,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "199",
@@ -1854,7 +1854,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "198",
@@ -1890,7 +1890,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "197",
@@ -1926,7 +1926,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "196",
@@ -1962,7 +1962,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "195",
@@ -1998,7 +1998,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "194",
@@ -2034,7 +2034,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "193",
@@ -2070,7 +2070,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "192",
@@ -2106,7 +2106,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "191",
@@ -2142,7 +2142,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "190",
@@ -2178,7 +2178,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "189",
@@ -2214,7 +2214,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "188",
@@ -2250,7 +2250,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "187",
@@ -2286,7 +2286,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "186",
@@ -2322,7 +2322,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "185",
@@ -2358,7 +2358,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "184",
@@ -2394,7 +2394,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "183",
@@ -2430,7 +2430,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "182",
@@ -2466,7 +2466,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "181",
@@ -2502,7 +2502,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "180",
@@ -2538,7 +2538,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "179",
@@ -2574,7 +2574,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "178",
@@ -2610,7 +2610,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "177",
@@ -2646,7 +2646,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "176",
@@ -2682,7 +2682,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "175",
@@ -2718,7 +2718,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "174",
@@ -2754,7 +2754,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "173",
@@ -2790,7 +2790,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "172",
@@ -2826,7 +2826,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "171",
@@ -2862,7 +2862,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "170",
@@ -2899,7 +2899,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "169",
@@ -2936,7 +2936,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "168",
@@ -2973,7 +2973,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "167",
@@ -3010,7 +3010,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "166",
@@ -3047,7 +3047,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "165",
@@ -3084,7 +3084,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "164",
@@ -3121,7 +3121,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "163",
@@ -3158,7 +3158,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "162",
@@ -3195,7 +3195,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "161",
@@ -3231,7 +3231,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "160",
@@ -3267,7 +3267,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "159",
@@ -3303,7 +3303,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "158",
@@ -3340,7 +3340,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "157",
@@ -3376,7 +3376,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "156",
@@ -3412,7 +3412,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "155",
@@ -3449,7 +3449,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "154",
@@ -3485,7 +3485,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "153",
@@ -3521,7 +3521,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "152",
@@ -3557,7 +3557,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "151",
@@ -3593,7 +3593,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "150",
@@ -3629,7 +3629,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "149",
@@ -3665,7 +3665,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "148",
@@ -3701,7 +3701,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "147",
@@ -3737,7 +3737,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "146",
@@ -3773,7 +3773,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "145",
@@ -3809,7 +3809,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "144",
@@ -3845,7 +3845,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "143",
@@ -3881,7 +3881,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "142",
@@ -3917,7 +3917,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "141",
@@ -3953,7 +3953,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "140",
@@ -3989,7 +3989,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "139",
@@ -4025,7 +4025,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "138",
@@ -4062,7 +4062,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "137",
@@ -4099,7 +4099,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "136",
@@ -4136,7 +4136,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "135",
@@ -4173,7 +4173,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "134",
@@ -4210,7 +4210,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "133",
@@ -4247,7 +4247,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "132",
@@ -4284,7 +4284,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "131",
@@ -4321,7 +4321,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "130",
@@ -4358,7 +4358,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "129",
@@ -4395,7 +4395,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "128",
@@ -4431,7 +4431,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "127",
@@ -4468,7 +4468,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "126",
@@ -4505,7 +4505,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "125",
@@ -4542,7 +4542,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "124",
@@ -4579,7 +4579,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "123",
@@ -4616,7 +4616,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "122",
@@ -4653,7 +4653,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "121",
@@ -4690,7 +4690,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "120",
@@ -4727,7 +4727,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "119",
@@ -4764,7 +4764,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "118",
@@ -4801,7 +4801,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "117",
@@ -4837,7 +4837,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "116",
@@ -4874,7 +4874,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "115",
@@ -4911,7 +4911,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "114",
@@ -4948,7 +4948,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "113",
@@ -4985,7 +4985,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "112",
@@ -5022,7 +5022,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "111",
@@ -5059,7 +5059,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "110",
@@ -5096,7 +5096,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "109",
@@ -5133,7 +5133,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "108",
@@ -5170,7 +5170,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "107",
@@ -5207,7 +5207,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "106",
@@ -5244,7 +5244,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "105",
@@ -5281,7 +5281,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "104",
@@ -5318,7 +5318,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "103",
@@ -5355,7 +5355,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "102",
@@ -5392,7 +5392,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "101",
@@ -5429,7 +5429,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "100",
@@ -5465,7 +5465,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "99",
@@ -5502,7 +5502,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "98",
@@ -5539,7 +5539,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "97",
@@ -5576,7 +5576,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "96",
@@ -5613,7 +5613,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "95",
@@ -5650,7 +5650,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "94",
@@ -5687,7 +5687,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "93",
@@ -5724,7 +5724,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "92",
@@ -5761,7 +5761,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "91b",
@@ -5797,7 +5797,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "91a",
@@ -5833,7 +5833,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "90",
@@ -5870,7 +5870,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "89",
@@ -5907,7 +5907,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "88",
@@ -5944,7 +5944,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "87",
@@ -5981,7 +5981,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "86",
@@ -6018,7 +6018,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "85",
@@ -6055,7 +6055,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "84",
@@ -6092,7 +6092,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "83",
@@ -6129,7 +6129,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "82",
@@ -6166,7 +6166,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "81",
@@ -6203,7 +6203,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "80",
@@ -6240,7 +6240,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "79",
@@ -6277,7 +6277,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "78",
@@ -6314,7 +6314,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "77",
@@ -6351,7 +6351,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "76",
@@ -6387,7 +6387,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "75",
@@ -6423,7 +6423,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "74",
@@ -6460,7 +6460,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "73",
@@ -6497,7 +6497,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "72",
@@ -6534,7 +6534,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "71",
@@ -6571,7 +6571,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "70",
@@ -6608,7 +6608,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "69",
@@ -6645,7 +6645,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "68",
@@ -6682,7 +6682,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "67",
@@ -6719,7 +6719,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "66",
@@ -6756,7 +6756,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "65",
@@ -6793,7 +6793,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "64",
@@ -6829,7 +6829,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "63",
@@ -6865,7 +6865,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "62",
@@ -6902,7 +6902,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "61",
@@ -6939,7 +6939,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "60",
@@ -6976,7 +6976,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "59",
@@ -7013,7 +7013,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "58",
@@ -7050,7 +7050,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "57",
@@ -7087,7 +7087,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "56",
@@ -7124,7 +7124,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "55",
@@ -7161,7 +7161,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "54",
@@ -7198,7 +7198,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "53",
@@ -7235,7 +7235,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "52",
@@ -7272,7 +7272,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "51",
@@ -7309,7 +7309,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "50",
@@ -7346,7 +7346,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "49",
@@ -7383,7 +7383,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "48",
@@ -7419,7 +7419,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "47",
@@ -7456,7 +7456,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "46",
@@ -7493,7 +7493,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "45",
@@ -7530,7 +7530,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "44",
@@ -7567,7 +7567,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "43",
@@ -7604,7 +7604,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "42",
@@ -7641,7 +7641,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "41",
@@ -7678,7 +7678,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "40",
@@ -7715,7 +7715,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "39",
@@ -7752,7 +7752,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "38",
@@ -7789,7 +7789,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "37",
@@ -7826,7 +7826,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "36",
@@ -7863,7 +7863,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "35",
@@ -7900,7 +7900,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "34",
@@ -7937,7 +7937,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "33",
@@ -7974,7 +7974,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "32",
@@ -8011,7 +8011,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "31",
@@ -8048,7 +8048,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "30",
@@ -8085,7 +8085,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "29",
@@ -8122,7 +8122,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "28",
@@ -8159,7 +8159,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "27",
@@ -8196,7 +8196,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "26",
@@ -8233,7 +8233,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "25",
@@ -8270,7 +8270,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "24",
@@ -8307,7 +8307,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "23",
@@ -8344,7 +8344,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "22",
@@ -8381,7 +8381,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "21",
@@ -8418,7 +8418,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "20",
@@ -8455,7 +8455,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "19",
@@ -8492,7 +8492,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "18",
@@ -8529,7 +8529,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "17",
@@ -8566,7 +8566,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "16",
@@ -8603,7 +8603,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "15",
@@ -8640,7 +8640,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "14",
@@ -8677,7 +8677,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "13",
@@ -8714,7 +8714,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "12",
@@ -8751,7 +8751,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "11",
@@ -8788,7 +8788,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "10",
@@ -8825,7 +8825,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "9",
@@ -8862,7 +8862,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "8",
@@ -8899,7 +8899,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "7",
@@ -8936,7 +8936,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "6",
@@ -8973,7 +8973,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "5",
@@ -9010,7 +9010,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "4",
@@ -9047,7 +9047,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "3",
@@ -9083,7 +9083,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "2",
@@ -9120,7 +9120,7 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
+      dd18: "0",
     },
     {
       drawNumber: "1",
@@ -9157,9 +9157,9 @@ export const data = {
       dd15: "0",
       dd16: "0",
       dd17: "0",
-      dd18: "0"
-    }
-  ]
+      dd18: "0",
+    },
+  ],
 };
 
 export default data;
