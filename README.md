@@ -21,12 +21,12 @@ To install and run the Create React App (CRA) tool, follow these steps:
 3. Clone the repository:
 
    <pre>
-   git clone <repository_url></pre>
+   git clone https://github.com/tmkasun/Canada-PR-statistics.git</pre>
    
 4. Navigate to the project's directory:
 
    <pre>
-   cd <project_directory>
+   cd Canada-PR-statistics
    
    </pre>
 5. Install the dependencies:
