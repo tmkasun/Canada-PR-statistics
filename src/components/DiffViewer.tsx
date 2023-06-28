@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const DiffViewer: React.FC<{diff: number, invert?: boolean}> = (props) => {
+export const DiffViewer: React.FC<{ diff: number, invert?: boolean }> = (props) => {
   const [showHighTool, setShowHighTool] = useState(false);
   const [showLowTool, setShowLowTool] = useState(false);
   const { diff, invert = false } = props;
@@ -17,7 +17,7 @@ export const DiffViewer: React.FC<{diff: number, invert?: boolean}> = (props) =>
             cursor: "default"
           }}
         >
-          ▲{showHighTool && <div className="hoverToolTip">Increased</div>}
+          ▲{showHighTool && <div className="hoverToolTip">Increased relative to last draw</div>}
         </span>
       )}
       {diff < 0 && (
@@ -27,7 +27,7 @@ export const DiffViewer: React.FC<{diff: number, invert?: boolean}> = (props) =>
           style={{ color: invert ? "green" : "red", position: "relative" }}
         >
           {" "}
-          ▼ {showLowTool && <div className="hoverToolTip">Decreased</div>}
+          ▼ {showLowTool && <div className="hoverToolTip">Decreased relative to last draw</div>}
         </span>
       )}
     </div>

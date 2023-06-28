@@ -8,6 +8,8 @@ import { EChartsOption } from 'echarts';
 import dayjs from 'dayjs';
 import relativeTime from "dayjs/plugin/relativeTime";
 import calendar from "dayjs/plugin/calendar";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
 dayjs.extend(relativeTime);
 dayjs.extend(calendar);
 
@@ -121,7 +123,6 @@ function Statistics(props: StatisticsProps) {
     let lastRound = null;
     let beforeLastRound = null;
     const isDataAvailable = lineChartOptions;
-
     if (filteredRounds) {
         lastRound = filteredRounds[filteredRounds.length - 1];
         beforeLastRound = filteredRounds[filteredRounds.length - 2];
@@ -172,7 +173,7 @@ function Statistics(props: StatisticsProps) {
                     <div className="statValue">
                         {lastRound && (
                             <select
-                                defaultValue={yParam}
+                                value={yParam}
                                 onChange={(e) => {
                                     setYParam(e.target.value as keyof IRound);
                                 }}
@@ -235,7 +236,7 @@ function Statistics(props: StatisticsProps) {
 
                         <div>Last Draw:</div>
                         <div className="statValue">
-                            {lastRound?.drawDate} ({dayjs(lastRound?.drawDate).fromNow()})
+                            {lastRound?.drawDate} ({dayjs(lastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).fromNow()})
                         </div>
                         {program === "No Program Specified" && (
                             <>
@@ -248,12 +249,12 @@ function Statistics(props: StatisticsProps) {
                                         marginRight: '0.5rem'
                                     }}>
                                         {lastRound &&
-                                            dayjs(lastRound?.drawDate).add(2.5, "week").fromNow()}
+                                            dayjs(lastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).add(2.5, "week").fromNow()}
                                     </span>
                                     <span>
                                         (
                                         {lastRound &&
-                                            dayjs(lastRound?.drawDate).add(2.5, "week").calendar()}
+                                            dayjs(lastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).add(2.5, "week").calendar()}
                                         )
 
                                     </span>
@@ -266,7 +267,10 @@ function Statistics(props: StatisticsProps) {
                                 {lastRound?.drawNumber}
                             </a>
                         </div>
-                        <div>Draw Size:</div>
+                        <div onClick={() => { setYParam('drawSize') }} style={{
+                            color: '#0000ffbf',
+                            cursor: 'pointer'
+                        }}>Draw Size:</div>
                         <div className="statValue">
                             {lastRound?.drawSize} (
                             <DiffViewer
@@ -274,7 +278,11 @@ function Statistics(props: StatisticsProps) {
                             />
                             )
                         </div>
-                        <div>Cut off CRS Scoore:</div>
+                        <div
+                            onClick={() => { setYParam('drawCRS') }} style={{
+                                color: '#0000ffbf',
+                                cursor: 'pointer'
+                            }} >Cut off CRS Scoore:</div>
                         <div className="statValue">
                             {lastRound?.drawCRS} (
                             <DiffViewer
