@@ -143,7 +143,7 @@ function Statistics(props: StatisticsProps) {
     let totalDraws;
     if (isDataAvailable) {
         const xAxisData = lineChartOptions?.xAxis as NonNullable<{ data: [] }[]>
-        totalDraws = xAxisData[0].data.length;
+        totalDraws = xAxisData[0].data.length - 1;
     }
     return (
         <>
