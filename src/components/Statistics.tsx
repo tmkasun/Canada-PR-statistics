@@ -24,6 +24,7 @@ function Statistics(props: StatisticsProps) {
     const [filteredRounds, setFilteredRounds] = useState<null | IRound[]>(null);
     const [yParam, setYParam] = useState<keyof IRound>("drawCRS");
     const [duration, setDuration] = useState("a");
+    const [programs, setPrograms] = useState<string[]>(PROGRAMS);
     const [lineChartOptions, setLineChartOptions] = useState<null | EChartsOption>(null);
 
     useEffect(() => {
@@ -34,7 +35,9 @@ function Statistics(props: StatisticsProps) {
         const dataPoints = [];
         const draws = [...data.rounds].reverse();
         const filteredRounds: IRound[] = [];
+        const programs = new Set<string>();
         for (let round of draws) {
+            programs.add(round.drawName);
             const checkYear = (year: string, duration: string) => {
                 switch (duration) {
                     case "a":
@@ -116,16 +119,25 @@ function Statistics(props: StatisticsProps) {
             series: yAxisData
         };
         onChange(opts as EChartsOption);
-        setLineChartOptions(opts as EChartsOption)
+        setLineChartOptions(opts as EChartsOption);
+        setPrograms([...programs])
     }, [program, data, yParam, duration]);
 
+    useEffect(() => {
 
-    let lastRound = null;
-    let beforeLastRound = null;
+        if (data) {
+            setProgram(data.rounds[0].drawName);
+        }
+
+    }, [data])
+
+
+    let filteredLastRound = null;
+    let beforeFilteredLastRound = null;
     const isDataAvailable = lineChartOptions;
     if (filteredRounds) {
-        lastRound = filteredRounds[filteredRounds.length - 1];
-        beforeLastRound = filteredRounds[filteredRounds.length - 2];
+        filteredLastRound = filteredRounds[filteredRounds.length - 1];
+        beforeFilteredLastRound = filteredRounds[filteredRounds.length - 2];
     }
 
     let totalDraws;
@@ -140,12 +152,12 @@ function Statistics(props: StatisticsProps) {
                     <div>Program:</div>
                     <div className="statValue">
                         <select
-                            defaultValue={PROGRAMS[1]}
+                            value={program}
                             onChange={(e) => {
                                 setProgram(e.target.value);
                             }}
                         >
-                            {PROGRAMS.map((p) => (
+                            {programs.map((p) => (
                                 <option value={p} key={p}>
                                     {p}
                                 </option>
@@ -171,7 +183,7 @@ function Statistics(props: StatisticsProps) {
                     <div></div>
                     <div>Y Axis:</div>
                     <div className="statValue">
-                        {lastRound && (
+                        {filteredLastRound && (
                             <select
                                 value={yParam}
                                 onChange={(e) => {
@@ -188,7 +200,7 @@ function Statistics(props: StatisticsProps) {
                     </div>
                 </div>
             </div>
-            {beforeLastRound && lastRound && lineChartOptions && (
+            {filteredLastRound && lineChartOptions && (
                 <>
                     <div className="last-draw-data statsPanel">
                         <div>
@@ -236,7 +248,10 @@ function Statistics(props: StatisticsProps) {
 
                         <div>Last Draw:</div>
                         <div className="statValue">
-                            {lastRound?.drawDate} ({dayjs(lastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).fromNow()})
+                            {filteredLastRound?.drawDate} (
+                            <span className='highlightGreen'>
+                                {dayjs(filteredLastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).fromNow()}
+                            </span>)
                         </div>
                         {program === "No Program Specified" && (
                             <>
@@ -248,13 +263,13 @@ function Statistics(props: StatisticsProps) {
                                         color: "red",
                                         marginRight: '0.5rem'
                                     }}>
-                                        {lastRound &&
-                                            dayjs(lastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).add(2.5, "week").fromNow()}
+                                        {filteredLastRound &&
+                                            dayjs(filteredLastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).add(2.5, "week").fromNow()}
                                     </span>
                                     <span>
                                         (
-                                        {lastRound &&
-                                            dayjs(lastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).add(2.5, "week").calendar()}
+                                        {filteredLastRound &&
+                                            dayjs(filteredLastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).add(2.5, "week").calendar()}
                                         )
 
                                     </span>
@@ -263,20 +278,28 @@ function Statistics(props: StatisticsProps) {
                         )}
                         <div>Draw Number of the last draw:</div>
                         <div className="statValue">
-                            <a href={DRAW_ENDPOINT + lastRound?.drawNumber} target="_blank">
-                                {lastRound?.drawNumber}
+                            <a href={DRAW_ENDPOINT + filteredLastRound?.drawNumber} target="_blank">
+                                {filteredLastRound?.drawNumber}
                             </a>
                         </div>
                         <div onClick={() => { setYParam('drawSize') }} style={{
                             color: '#0000ffbf',
                             cursor: 'pointer'
                         }}>Draw Size:</div>
+
                         <div className="statValue">
-                            {lastRound?.drawSize} (
-                            <DiffViewer
-                                diff={lastRound.drawSize - beforeLastRound.drawSize}
-                            />
-                            )
+                            {filteredLastRound?.drawSize}
+                            {beforeFilteredLastRound && (
+                                <>
+                                    {" "}
+                                    (
+                                    <DiffViewer
+                                        diff={filteredLastRound.drawSize - beforeFilteredLastRound.drawSize}
+                                    />
+                                    )
+                                </>
+                            )}
+
                         </div>
                         <div
                             onClick={() => { setYParam('drawCRS') }} style={{
@@ -284,12 +307,19 @@ function Statistics(props: StatisticsProps) {
                                 cursor: 'pointer'
                             }} >Cut off CRS Scoore:</div>
                         <div className="statValue">
-                            {lastRound?.drawCRS} (
-                            <DiffViewer
-                                invert
-                                diff={lastRound?.drawCRS - beforeLastRound?.drawCRS}
-                            />
-                            )
+                            {filteredLastRound?.drawCRS}
+                            {beforeFilteredLastRound && (
+                                <>
+                                    {" "}
+                                    (
+                                    <DiffViewer
+                                        invert
+                                        diff={filteredLastRound?.drawCRS - beforeFilteredLastRound?.drawCRS}
+                                    />
+                                    )
+                                </>
+                            )}
+
                         </div>
 
                     </div>

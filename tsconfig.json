@@ -3,6 +3,8 @@
         "./src/**/*"
     ],
     "compilerOptions": {
+        "target": "ES2016",
+        "moduleResolution": "Node",
         "strict": true,
         "esModuleInterop": true,
         "lib": [

@@ -88,6 +88,10 @@
   width: 280px;
 }
 
+.highlightGreen {
+  color: green;
+}
+
 .titleText {
   display: flex;
   justify-content: center;
