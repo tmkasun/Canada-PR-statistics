@@ -12,7 +12,7 @@ const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
  *
  * @return {Promise<OAuth2Client|null>}
  */
-async function loadSavedCredentialsIfExist() {
+export async function loadSavedCredentialsIfExist() {
     try {
         const content = await fs.readFile(TOKEN_PATH);
         const credentials = JSON.parse(content);
@@ -28,7 +28,7 @@ async function loadSavedCredentialsIfExist() {
  * @param {OAuth2Client} client
  * @return {Promise<void>}
  */
-async function saveCredentials(client) {
+export async function saveCredentials(client) {
     const content = await fs.readFile(CREDENTIALS_PATH);
     const keys = JSON.parse(content);
     const key = keys.installed || keys.web;
@@ -45,7 +45,7 @@ async function saveCredentials(client) {
  * Load or request or authorization to call APIs.
  *
  */
-async function authorize() {
+export async function authorize() {
     let client = await loadSavedCredentialsIfExist();
     if (client) {
         return client;
