@@ -20,13 +20,14 @@ const { resendAPIKey } = require("./configs.json");
         }
         console.log(`Found last draw from mongo = ${lastKnownDraw?.lastDraw}!`)
         const latestDrawNumber = parseInt(latestRound.drawNumber);
+        console.log(`Latest Draw number ${latestDrawNumber}`);
         debugger;
         if (latestDrawNumber > lastKnownDraw?.lastDraw) {
-            debugger;
+            console.log(`Found a new draw ${latestDrawNumber}`)
 
             const aa = await db.updateOne({ _id: { $eq: lastKnownDraw?._id } }, { $set: { lastDraw: latestDrawNumber } })
             const resend = new Resend(resendAPIKey);
-
+            console.log(`Sending email!`)
             const a = await resend.emails.send({
                 from: 'noreply@send.knnect.com',
                 to: 'tmkasun@gmail.com',
