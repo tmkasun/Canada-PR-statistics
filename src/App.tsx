@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "./styles.css";
-import LineChart from "./components/LineChart";
-import { useIRCCData, clearAndParseNumber } from "./data/api";
+import { useIRCCData } from "./data/api";
 import { EChartsOption } from "echarts";
 import TitleText from "./components/TitleText";
 import Statistics from "./components/Statistics";
+import REBarChart from "./components/BarChart";
+import LineChart from "./components/LineChart";
 
 export default function App() {
   const [lineChartOptions, setLineChartOptions] = useState<null | EChartsOption>(null);
@@ -18,7 +19,8 @@ export default function App() {
         <div className="main-graph">
           {isLoading && <h2>Loading . . .</h2>}
           {!isLoading && lineChartOptions && (
-            <LineChart id="c1" options={lineChartOptions} />
+            Array.isArray(lineChartOptions.series) && lineChartOptions.series[0].type === 'bar' ?
+              (<REBarChart id="c2" options={lineChartOptions} />) : (<LineChart id="c1" options={lineChartOptions} />)
           )}
         </div>
       </div>

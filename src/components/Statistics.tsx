@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DRAW_ENDPOINT, IIRCCData, IRound, PROGRAMS, SUPPORTED_PARAMS } from "../data/consts";
 import DiffViewer from "./DiffViewer";
 
 import { quantile, mean, min } from "simple-statistics";
-import useIRCCData, { clearAndParseNumber } from '../data/api';
+import { clearAndParseNumber } from '../data/api';
 import { EChartsOption } from 'echarts';
 import dayjs from 'dayjs';
 import relativeTime from "dayjs/plugin/relativeTime";
 import calendar from "dayjs/plugin/calendar";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import getChartOptions from '../data/chartOptions';
 dayjs.extend(customParseFormat);
 dayjs.extend(relativeTime);
 dayjs.extend(calendar);
@@ -68,56 +69,12 @@ function Statistics(props: StatisticsProps) {
                 );
             }
         }
-        const legend = { data: [yParam] };
         xAxisData.unshift("date");
         dataPoints.unshift(program);
         setFilteredRounds(filteredRounds);
-        const yAxisData = [
-            {
-                data: dataPoints,
-                emphasis: { focus: "series" },
-                name: yParam,
-                type: "line"
-            }
-        ];
-
-        let opts = {
-            title: {},
-            tooltip: {
-                trigger: "axis",
-                axisPointer: {
-                    type: "cross",
-                    label: {
-                        backgroundColor: "#6a7985"
-                    }
-                }
-            },
-            legend,
-            toolbox: {
-                feature: {
-                    saveAsImage: {}
-                }
-            },
-            grid: {
-                left: "3%",
-                right: "4%",
-                bottom: "3%",
-                containLabel: true
-            },
-            xAxis: [
-                {
-                    type: 'category',
-                    boundaryGap: false,
-                    data: xAxisData
-                }
-            ],
-            yAxis: [
-                {
-                    type: "value"
-                }
-            ],
-            series: yAxisData
-        };
+        const yAxisData = dataPoints;
+        const chartType = xAxisData.length > 5 ? 'line' : 'bar';
+        let opts = getChartOptions(yParam, xAxisData, yAxisData, chartType);
         onChange(opts as EChartsOption);
         setLineChartOptions(opts as EChartsOption);
         setPrograms([...programs])
