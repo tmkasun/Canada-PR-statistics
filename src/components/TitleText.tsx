@@ -2,7 +2,7 @@ import React from 'react'
 
 function TitleText() {
     return (
-        <div className="titleText">
+        <div className="titleText ">
             <h1 style={{
                 flexGrow: 1
             }}>Canada PR Stats </h1>

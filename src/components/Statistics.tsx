@@ -105,7 +105,7 @@ function Statistics(props: StatisticsProps) {
     return (
         <>
             <div className="controls">
-                <div className="statsPanel">
+                <div className="statsPanel ">
                     <div>Program:</div>
                     <div className="statValue">
                         <select

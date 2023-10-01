@@ -44,9 +44,10 @@ export default function getChartOptions(yParam: string, xAxisData: any[], yAxisD
                 data: yAxisData,
                 emphasis: { focus: "series" },
                 name: yParam,
-                type: "line"
+                type: "line",
             }
-        ]
+        ],
+        barMaxWidth: '20%'
     }
     switch (chartType) {
         case 'bar':
