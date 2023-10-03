@@ -5,7 +5,9 @@
 
 The **Canada PR Statistics** is a simple web application that allows you to visualize the Canada PR Express Entry draws details using the official Canada.ca API. The statistical data is derived purely from the official data provided by the Canadian government. Please note that this visualization is for informational purposes only.
 
-<pre class="vditor-reset" placeholder="" contenteditable="true" spellcheck="false"><p data-block="0"><img src="https://github.com/tmkasun/Canada-PR-statistics/assets/3313885/22a9060c-b21f-4a55-bf1c-59f154648e45" alt="image"/></p><p data-block="0"><img src="https://github.com/tmkasun/Canada-PR-statistics/assets/3313885/8a0bed29-0584-4ae5-a054-99fec55a9245" alt="image"/></p></pre>
+![image](https://github.com/tmkasun/Canada-PR-statistics/assets/3313885/d7235ced-f368-4ae2-8794-732e6cf801de)
+
+![image](https://github.com/tmkasun/Canada-PR-statistics/assets/3313885/584f561f-281c-4958-b098-151b295cec1b)
 
 
 ## Technical Details
