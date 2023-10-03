@@ -1,26 +1,32 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 import { DRAW_ENDPOINT, IIRCCData, IRound, PROGRAMS, SUPPORTED_PARAMS } from "../data/consts";
-import DiffViewer from "./DiffViewer";
 
 import { quantile, mean, min } from "simple-statistics";
-import { clearAndParseNumber } from '../data/api';
-import { EChartsOption } from 'echarts';
-import dayjs from 'dayjs';
+import { clearAndParseNumber } from "../data/api";
+import { EChartsOption } from "echarts";
+import getChartOptions from "../data/chartOptions";
+import Selector from "./Selector";
+import REBarChart from "./BarChart";
+import LineChart from "./LineChart";
+import StatsCard from "./StatsCard";
+import ProgramCard from "./ProgramCard";
+
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import calendar from "dayjs/plugin/calendar";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-import getChartOptions from '../data/chartOptions';
+
 dayjs.extend(customParseFormat);
 dayjs.extend(relativeTime);
 dayjs.extend(calendar);
 
 type StatisticsProps = {
-    onChange: (e: EChartsOption) => void;
-    data: IIRCCData | null
+    data: IIRCCData | null;
+    isLoading?: boolean
 }
 
 function Statistics(props: StatisticsProps) {
-    const { onChange, data } = props;
+    const { isLoading, data } = props;
     const [program, setProgram] = useState(PROGRAMS[1]);
     const [filteredRounds, setFilteredRounds] = useState<null | IRound[]>(null);
     const [yParam, setYParam] = useState<keyof IRound>("drawCRS");
@@ -73,20 +79,17 @@ function Statistics(props: StatisticsProps) {
         dataPoints.unshift(program);
         setFilteredRounds(filteredRounds);
         const yAxisData = dataPoints;
-        const chartType = xAxisData.length > 5 ? 'line' : 'bar';
+        const chartType = xAxisData.length > 5 ? "line" : "bar";
         let opts = getChartOptions(yParam, xAxisData, yAxisData, chartType);
-        onChange(opts as EChartsOption);
         setLineChartOptions(opts as EChartsOption);
-        setPrograms([...programs])
+        setPrograms([...programs]);
     }, [program, data, yParam, duration]);
 
     useEffect(() => {
-
         if (data) {
             setProgram(data.rounds[0].drawName);
         }
-
-    }, [data])
+    }, [data]);
 
 
     let filteredLastRound = null;
@@ -99,192 +102,108 @@ function Statistics(props: StatisticsProps) {
 
     let totalDraws;
     if (isDataAvailable) {
-        const xAxisData = lineChartOptions?.xAxis as NonNullable<{ data: [] }[]>
+        const xAxisData = lineChartOptions?.xAxis as NonNullable<{ data: [] }[]>;
         totalDraws = xAxisData[0].data.length - 1;
     }
     return (
         <>
-            <div className="controls">
-                <div className="statsPanel ">
-                    <div>Program:</div>
-                    <div className="statValue">
-                        <select
-                            value={program}
-                            onChange={(e) => {
-                                setProgram(e.target.value);
-                            }}
-                        >
-                            {programs.map((p) => (
-                                <option value={p} key={p}>
-                                    {p}
-                                </option>
-                            ))}
-                        </select>
+            <div className="grid-cols-4 700 w-full grid border rounded-lg">
+                <ProgramCard isLatest={data && data.rounds[0].drawName === program} label="Program" program={filteredLastRound} />
+                <StatsCard label="CRS Score" invert value={filteredLastRound?.drawCRS || -1} lastValue={beforeFilteredLastRound?.drawCRS} />
+                <StatsCard label="Draw Size" value={filteredLastRound?.drawSize || -1} lastValue={beforeFilteredLastRound?.drawSize} />
+                <StatsCard label="Pool size" invert value={parseInt(filteredLastRound?.dd18 || "")} lastValue={parseInt(beforeFilteredLastRound?.dd18 || "")} />
+            </div>
+            <div className="flex justify-between items-center">
+                <div className="flex gap-x-8">
+                    <div className="w-80 ">
+                        <Selector marked={data && data.rounds[0].drawName || undefined} label="Program:" data={programs.map(p => ({ name: p, key: p }))} value={program} onChange={(newP) => setProgram(newP.key)} />
                     </div>
-                    <div style={{ marginTop: '1rem' }}>Year:</div>
-                    <div style={{ marginTop: '1rem' }} className="statValue">
-                        <select
-                            defaultValue={"a"}
-                            onChange={(e) => {
-                                setDuration(e.target.value);
-                            }}
-                        >
-                            <option value={"a"}>All</option>
-                            <option value={"t"}>This Year</option>
-                            <option value={"l"}>Last Year</option>
-                            <option value={"lt"}>Last 2 Years</option>
-                        </select>
+                    <div className="flex justify-center items-center gap-x-6">
+                        <div >In Last </div>
+                        <div className="flex justify-center gap-x-4 items-center">
+                            <button className={`py-1 px-2 cursor-pointer border-b-2 ${duration === "t" ? "bg-blue-50 border-blue-600" : "hover:bg-slate-50 border-gray-300"}`} onClick={() => setDuration("t")}>
+                                1 Year
+                            </button>
+                            <button className={`py-1 px-2 cursor-pointer border-b-2 ${duration === "lt" ? "bg-blue-50 border-blue-600" : "hover:bg-slate-50 border-gray-300"}`} onClick={() => setDuration("lt")}>
+                                2 Year
+                            </button>
+                            <button className={`py-1 px-2 cursor-pointer border-b-2 ${duration === "a" ? "bg-blue-50 border-blue-600" : "hover:bg-slate-50 border-gray-300"}`} onClick={() => setDuration("a")}>
+                                All-time
+                            </button>
+                        </div>
                     </div>
-                    {/* Fix style */}
-                    <div style={{ marginTop: "2rem" }}></div>
-                    <div></div>
-                    <div>Y Axis:</div>
-                    <div className="statValue">
-                        {filteredLastRound && (
-                            <select
-                                value={yParam}
-                                onChange={(e) => {
-                                    setYParam(e.target.value as keyof IRound);
-                                }}
-                            >
-                                {SUPPORTED_PARAMS.map((p) => (
-                                    <option value={p} key={p}>
-                                        {p}
-                                    </option>
-                                ))}
-                            </select>
-                        )}
-                    </div>
+                </div>
+
+                {/* Fix style */}
+                <div className="w-80">
+                    <Selector label="Y Axis:" data={SUPPORTED_PARAMS.map(p => ({ name: p, key: p }))} value={yParam} onChange={(newP) => setYParam(newP.key as any)} />
                 </div>
             </div>
             {filteredLastRound && lineChartOptions && (
-                <>
-                    <div className="last-draw-data statsPanel">
-                        <div>
-                            Total Number of Draws in{" "}
-                            <b style={{ marginLeft: "0.5rem" }}>{program}</b>:
-                        </div>
-                        <div className="statValue">{totalDraws}</div>
-                        {/* {program === "No Program Specified" && (
-                            <>
-                                <div>Programs:</div>
-                                <div className="statValue program-list">
-                                    {lastRound &&
-                                        lastRound.drawText2
-                                            .split(",")
-                                            .map((t) => <li>{t.trim()}</li>)}
-                                </div>
-                            </>
-                        )} */}
-                        <div>
-                            Cut off CRS Scoore <b style={{ marginLeft: "0.5rem" }}>Mean</b>:
-                        </div>
-                        <div className="statValue">
-                            {filteredRounds &&
+                <div className="flex flex-row-reverse">
+                    <div className="grow">
+                        {!isLoading && lineChartOptions && (
+                            Array.isArray(lineChartOptions.series) && lineChartOptions.series[0].type === "bar" ?
+                                (<REBarChart id="c2" options={lineChartOptions} />) : (<LineChart id="c1" options={lineChartOptions} />)
+                        )}
+                    </div>
+
+                    <div className="p-7 flex flex-col justify-start gap-6 rounded-2xl border border-gray-100 bg-gray-50 w-72">
+                        <h2 className="text-gray-950 text-xl font-semibold leading-6">Statistics</h2>
+                        <div className="flex flex-col gap-3">
+                            <div className="flex text-gray-500 justify-between items-center">Total Draws <span className="text-indigo-900 font-semibold">{totalDraws}</span></div>
+                            <div className="flex text-gray-500 justify-between items-center">Mean CRS Score <span className="text-indigo-900 font-semibold">{filteredRounds &&
                                 mean(
-                                    filteredRounds.map((r) => r.drawCRS)).toFixed(2)}
-                        </div>
-                        <div>
-                            Cut off CRS Scoore <b style={{ marginLeft: "0.5rem" }}>Min</b>:
-                        </div>
-                        <div className="statValue">
-                            {filteredRounds && min(filteredRounds.map((r) => r.drawCRS))}
-                        </div>
-                        <div>
-                            Cut off CRS Scoore <b style={{ marginLeft: "0.5rem" }}>90%</b>:
-                        </div>
-                        <div className="statValue">
-                            {filteredRounds &&
+                                    filteredRounds.map((r) => r.drawCRS)).toFixed(0)}</span></div>
+                            <div className="flex text-gray-500 justify-between items-center">Min CRS Score <span className="text-indigo-900 font-semibold">{filteredRounds && min(filteredRounds.map((r) => r.drawCRS))}</span></div>
+                            <div className="flex text-gray-500 justify-between items-center">90% CRS Score <span className="text-indigo-900 font-semibold">{filteredRounds &&
                                 quantile(
                                     filteredRounds.map((r) => r.drawCRS),
                                     0.9
-                                )}
-                        </div>
-                    </div>
-                    <div className="draw-stats statsPanel">
-
-                        <div>Last Draw:</div>
-                        <div className="statValue">
-                            {filteredLastRound?.drawDate} (
-                            <span className='highlightGreen'>
-                                {dayjs(filteredLastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).fromNow()}
-                            </span>)
-                        </div>
-                        {program === "No Program Specified" && (
-                            <>
-                                <div>Next Potential Draw:</div>
-                                <div
-                                    className="statValue"
-                                >
-                                    <span style={{
-                                        color: "red",
-                                        marginRight: '0.5rem'
-                                    }}>
-                                        {filteredLastRound &&
-                                            dayjs(filteredLastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).add(2.5, "week").fromNow()}
-                                    </span>
-                                    <span>
-                                        (
-                                        {filteredLastRound &&
-                                            dayjs(filteredLastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).add(2.5, "week").calendar()}
-                                        )
-
-                                    </span>
-                                </div>
-                            </>
-                        )}
-                        <div>Draw Number of the last draw:</div>
-                        <div className="statValue">
-                            <a href={DRAW_ENDPOINT + filteredLastRound?.drawNumber} target="_blank">
-                                {filteredLastRound?.drawNumber}
-                            </a>
-                        </div>
-                        <div onClick={() => { setYParam('drawSize') }} style={{
-                            color: '#0000ffbf',
-                            cursor: 'pointer'
-                        }}>Draw Size:</div>
-
-                        <div className="statValue">
-                            {filteredLastRound?.drawSize}
-                            {beforeFilteredLastRound && (
+                                )}</span></div>
+                            {/* {program === "No Program Specified" && (
                                 <>
-                                    {" "}
-                                    (
-                                    <DiffViewer
-                                        diff={filteredLastRound.drawSize - beforeFilteredLastRound.drawSize}
-                                    />
-                                    )
+                                    <div>Programs:</div>
+                                    <div className="statValue program-list">
+                                        {lastRound &&
+                                            lastRound.drawText2
+                                                .split(",")
+                                                .map((t) => <li>{t.trim()}</li>)}
+                                    </div>
+                                </>
+                            )} */}
+                        </div>
+                        <div className="draw-stats statsPanel">
+                            {program === "No Program Specified" && (
+                                <>
+                                    <div>Next Potential Draw:</div>
+                                    <div
+                                        className=""
+                                    >
+                                        <span style={{
+                                            color: "red",
+                                            marginRight: "0.5rem"
+                                        }}>
+                                            {filteredLastRound &&
+                                                dayjs(filteredLastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).add(4, "week").fromNow()}
+                                        </span>
+                                        <span>
+                                            (
+                                            {filteredLastRound &&
+                                                dayjs(filteredLastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).add(4, "week").calendar()}
+                                            )
+
+                                        </span>
+                                    </div>
                                 </>
                             )}
-
                         </div>
-                        <div
-                            onClick={() => { setYParam('drawCRS') }} style={{
-                                color: '#0000ffbf',
-                                cursor: 'pointer'
-                            }} >Cut off CRS Scoore:</div>
-                        <div className="statValue">
-                            {filteredLastRound?.drawCRS}
-                            {beforeFilteredLastRound && (
-                                <>
-                                    {" "}
-                                    (
-                                    <DiffViewer
-                                        invert
-                                        diff={filteredLastRound?.drawCRS - beforeFilteredLastRound?.drawCRS}
-                                    />
-                                    )
-                                </>
-                            )}
-
-                        </div>
-
                     </div>
-                </>
+                </div>
             )
             }
         </>
-    )
+    );
 }
 
-export default Statistics
+export default Statistics;

@@ -1,4 +1,4 @@
-export const DRAW_ENDPOINT = `https://www.canada.ca/en/immigration-refugees-citizenship/corporate/mandate/policies-operational-instructions-agreements/ministerial-instructions/express-entry-rounds/invitations.html?q=`;
+export const DRAW_ENDPOINT = "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/mandate/policies-operational-instructions-agreements/ministerial-instructions/express-entry-rounds/invitations.html?q=";
 
 export const SUPPORTED_PARAMS = [
     "drawNumber",

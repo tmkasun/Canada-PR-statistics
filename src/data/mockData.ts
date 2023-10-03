@@ -8915,4 +8915,4 @@ export default data = {
 			"dd18": "0"
 		}
 	]
-}
+};

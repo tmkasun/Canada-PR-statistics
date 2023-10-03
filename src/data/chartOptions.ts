@@ -1,6 +1,6 @@
 import { EChartsOption } from "echarts";
 
-export type IChartType = 'bar' | 'line';
+export type IChartType = "bar" | "line";
 export default function getChartOptions(yParam: string, xAxisData: any[], yAxisData: any[], chartType: IChartType) {
     const legend = { data: [yParam] };
 
@@ -29,7 +29,7 @@ export default function getChartOptions(yParam: string, xAxisData: any[], yAxisD
         },
         xAxis: [
             {
-                type: 'category',
+                type: "category",
                 boundaryGap: false,
                 data: xAxisData
             }
@@ -47,20 +47,20 @@ export default function getChartOptions(yParam: string, xAxisData: any[], yAxisD
                 type: "line",
             }
         ],
-        barMaxWidth: '20%'
-    }
+        barMaxWidth: "20%"
+    };
     switch (chartType) {
-        case 'bar':
-            options.series[0].type = chartType
+        case "bar":
+            options.series[0].type = chartType;
             break;
-        case 'line':
-            options.series[0].type = chartType
+        case "line":
+            options.series[0].type = chartType;
             break;
 
         default:
-            throw new Error(`Unsupported chart type ${chartType}!`)
+            throw new Error(`Unsupported chart type ${chartType}!`);
     }
 
-    return options as EChartsOption
+    return options as EChartsOption;
 
 }

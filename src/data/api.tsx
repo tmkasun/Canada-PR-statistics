@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import mockData from './mockData';
+import mockData from "./mockData";
 import { IIRCCData } from "./consts";
 
 export const clearAndParseNumber = (numberInString: string) => {
@@ -25,9 +25,9 @@ export const useIRCCData = (isMocked=false) => {
         return await new Promise((r) => {
           setTimeout(() => {
             setData(mockData as any);
-            setIsLoading(false)
-          }, 2000)
-        })
+            setIsLoading(false);
+          }, 2000);
+        });
       }
       const res = await fetch(
         "https://www.canada.ca/content/dam/ircc/documents/json/ee_rounds_123_en.json"
