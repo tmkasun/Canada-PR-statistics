@@ -4,7 +4,7 @@ import Statistics from "~/components/Statistics";
 import { useIRCCData } from "~/data/api";
 
 const MainPage = () => {
-    const { data, isLoading } = useIRCCData(true);
+    const { data, isLoading } = useIRCCData();
 
     return (
         <>
