@@ -14,7 +14,7 @@ export default function App() {
     <div className="min-h-screen flex flex-col sm:m-1 md:mx-6 justify-start items-center gap-y-8">
       <AppBar />
       <div className="main-grid">
-        {!isLoading && <Statistics data={data} onChange={(e) => setLineChartOptions(e)} />}
+        {!isLoading && <Statistics data={data} />}
         <div className="main-graph">
           {isLoading && (
             <span className="flex justify-center items-center ">

@@ -108,7 +108,7 @@ function Statistics(props: StatisticsProps) {
     return (
         <>
             <div className="grid-cols-4 700 w-full grid border rounded-lg">
-                <ProgramCard isLatest={data && data.rounds[0].drawName === program} label="Program" program={filteredLastRound} />
+                <ProgramCard isLatest={data && data.rounds[0].drawName === program} program={filteredLastRound} />
                 <StatsCard label="CRS Score" invert value={filteredLastRound?.drawCRS || -1} lastValue={beforeFilteredLastRound?.drawCRS} />
                 <StatsCard label="Draw Size" value={filteredLastRound?.drawSize || -1} lastValue={beforeFilteredLastRound?.drawSize} />
                 <StatsCard label="Pool size" invert value={parseInt(filteredLastRound?.dd18 || "")} lastValue={parseInt(beforeFilteredLastRound?.dd18 || "")} />
