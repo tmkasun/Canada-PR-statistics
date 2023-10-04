@@ -37,7 +37,7 @@ export default function ProgramCard(props: IStatsCard) {
                 onMouseLeave={() => setIsToolTipOpen(false)}
                 className="font-extrabold text-xl leading-[3rem] text-gray-950 block truncate cursor-help">{program?.drawName}</h2>
             {isToolTipOpen && (
-                <div className="absolute bottom-2 bg-gray-950 text-white p-2 whitespace-nowrap rounded-lg">{program?.drawName}</div>
+                <div className="absolute bottom-2 bg-gray-800 text-white p-2 whitespace-nowrap rounded-lg">{program?.drawName}</div>
             )}
             {isLatest && (
                 <div className="absolute bg-red-50 -top-2 -left-2 p-1 rounded-3xl text-gray-800 shadow-md border border-red-500">NEW</div>

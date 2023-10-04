@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { DRAW_ENDPOINT, IIRCCData, IRound, PROGRAMS, SUPPORTED_PARAMS } from "../data/consts";
 
 import { quantile, mean, min } from "simple-statistics";
@@ -15,6 +15,7 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import calendar from "dayjs/plugin/calendar";
+import { Activities, IActivity } from "./Activities";
 
 dayjs.extend(customParseFormat);
 dayjs.extend(relativeTime);
@@ -33,6 +34,21 @@ function Statistics(props: StatisticsProps) {
     const [duration, setDuration] = useState("a");
     const [programs, setPrograms] = useState<string[]>(PROGRAMS);
     const [lineChartOptions, setLineChartOptions] = useState<null | EChartsOption>(null);
+
+    const latest10Rounds = useMemo(() => {
+        let latest10Rounds: IActivity[] = [];
+        if (data) {
+            latest10Rounds = data.rounds.slice(0, 5).map((round) => {
+                const parsedDateTime = dayjs(round.drawDate);
+                if (!parsedDateTime.isValid()) {
+                    throw new Error(`Error parsing the date time => ${round.drawDate}`);
+                } else {
+                    return { name: round.drawName, time: parsedDateTime, id: round.drawNumber };
+                }
+            });
+        }
+        return latest10Rounds;
+    }, [data]);
 
     useEffect(() => {
         if (!data) {
@@ -148,20 +164,21 @@ function Statistics(props: StatisticsProps) {
                         )}
                     </div>
 
-                    <div className="p-7 flex flex-col justify-start gap-6 rounded-2xl border border-gray-100 bg-gray-50 w-72">
-                        <h2 className="text-gray-950 text-xl font-semibold leading-6">Statistics</h2>
-                        <div className="flex flex-col gap-3">
-                            <div className="flex text-gray-500 justify-between items-center">Total Draws <span className="text-indigo-900 font-semibold">{totalDraws}</span></div>
-                            <div className="flex text-gray-500 justify-between items-center">Mean CRS Score <span className="text-indigo-900 font-semibold">{filteredRounds &&
-                                mean(
-                                    filteredRounds.map((r) => r.drawCRS)).toFixed(0)}</span></div>
-                            <div className="flex text-gray-500 justify-between items-center">Min CRS Score <span className="text-indigo-900 font-semibold">{filteredRounds && min(filteredRounds.map((r) => r.drawCRS))}</span></div>
-                            <div className="flex text-gray-500 justify-between items-center">90% CRS Score <span className="text-indigo-900 font-semibold">{filteredRounds &&
-                                quantile(
-                                    filteredRounds.map((r) => r.drawCRS),
-                                    0.9
-                                )}</span></div>
-                            {/* {program === "No Program Specified" && (
+                    <div className="flex flex-col gap-y-4">
+                        <div className="p-7 flex flex-col justify-start gap-6 rounded-2xl border border-gray-100 bg-gray-50 w-72">
+                            <h2 className="text-gray-950 text-xl font-semibold leading-6">Statistics</h2>
+                            <div className="flex flex-col gap-3">
+                                <div className="flex text-gray-500 justify-between items-center">Total Draws <span className="text-indigo-900 font-semibold">{totalDraws}</span></div>
+                                <div className="flex text-gray-500 justify-between items-center">Mean CRS Score <span className="text-indigo-900 font-semibold">{filteredRounds &&
+                                    mean(
+                                        filteredRounds.map((r) => r.drawCRS)).toFixed(0)}</span></div>
+                                <div className="flex text-gray-500 justify-between items-center">Min CRS Score <span className="text-indigo-900 font-semibold">{filteredRounds && min(filteredRounds.map((r) => r.drawCRS))}</span></div>
+                                <div className="flex text-gray-500 justify-between items-center">90% CRS Score <span className="text-indigo-900 font-semibold">{filteredRounds &&
+                                    quantile(
+                                        filteredRounds.map((r) => r.drawCRS),
+                                        0.9
+                                    )}</span></div>
+                                {/* {program === "No Program Specified" && (
                                 <>
                                     <div>Programs:</div>
                                     <div className="statValue program-list">
@@ -172,31 +189,43 @@ function Statistics(props: StatisticsProps) {
                                     </div>
                                 </>
                             )} */}
-                        </div>
-                        <div className="draw-stats statsPanel">
-                            {program === "No Program Specified" && (
-                                <>
-                                    <div>Next Potential Draw:</div>
-                                    <div
-                                        className=""
-                                    >
-                                        <span style={{
-                                            color: "red",
-                                            marginRight: "0.5rem"
-                                        }}>
-                                            {filteredLastRound &&
-                                                dayjs(filteredLastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).add(4, "week").fromNow()}
-                                        </span>
-                                        <span>
-                                            (
-                                            {filteredLastRound &&
-                                                dayjs(filteredLastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).add(4, "week").calendar()}
-                                            )
+                            </div>
+                            <div className="draw-stats statsPanel">
+                                {program === "No Program Specified" && (
+                                    <>
+                                        <div>Next Potential Draw:</div>
+                                        <div
+                                            className=""
+                                        >
+                                            <span style={{
+                                                color: "red",
+                                                marginRight: "0.5rem"
+                                            }}>
+                                                {filteredLastRound &&
+                                                    dayjs(filteredLastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).add(4, "week").fromNow()}
+                                            </span>
+                                            <span>
+                                                (
+                                                {filteredLastRound &&
+                                                    dayjs(filteredLastRound?.drawDate, ["YYYY-MM-DD", "DD-MM-YYYY"]).add(4, "week").calendar()}
+                                                )
 
-                                        </span>
-                                    </div>
-                                </>
-                            )}
+                                            </span>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                        <div className="py-7 flex flex-col justify-start gap-6 rounded-2xl border border-gray-100 bg-gray-50 w-72">
+                            <h2 className="text-gray-950 text-xl px-7 font-semibold leading-6">Recent Draws</h2>
+                            <div className="px-3">
+                                <Activities onClick={(drawNumber) => {
+                                    const program = data?.rounds.find((r) => r.drawNumber === drawNumber);
+                                    if (program) {
+                                        setProgram(program.drawName);
+                                    }
+                                }} data={latest10Rounds} />
+                            </div>
                         </div>
                     </div>
                 </div>
