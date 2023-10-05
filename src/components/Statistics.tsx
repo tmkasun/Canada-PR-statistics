@@ -125,9 +125,9 @@ function Statistics(props: StatisticsProps) {
         <>
             <div className="grid-cols-4 700 w-full grid border rounded-lg">
                 <ProgramCard isLatest={data && data.rounds[0].drawName === program} program={filteredLastRound} />
-                <StatsCard label="CRS Score" invert value={filteredLastRound?.drawCRS || -1} lastValue={beforeFilteredLastRound?.drawCRS} />
-                <StatsCard label="Draw Size" value={filteredLastRound?.drawSize || -1} lastValue={beforeFilteredLastRound?.drawSize} />
-                <StatsCard label="Pool size" invert value={parseInt(filteredLastRound?.dd18 || "")} lastValue={parseInt(beforeFilteredLastRound?.dd18 || "")} />
+                <StatsCard onClick={() => setYParam("drawCRS")} label="CRS Score" invert value={filteredLastRound?.drawCRS || -1} lastValue={beforeFilteredLastRound?.drawCRS} />
+                <StatsCard onClick={() => setYParam("drawSize")} label="Draw Size" value={filteredLastRound?.drawSize || -1} lastValue={beforeFilteredLastRound?.drawSize} />
+                <StatsCard onClick={() => setYParam("dd18")} label="Pool size" invert value={parseInt(filteredLastRound?.dd18 || "")} lastValue={parseInt(beforeFilteredLastRound?.dd18 || "")} />
             </div>
             <div className="flex justify-between items-center">
                 <div className="flex gap-x-8">
@@ -178,17 +178,6 @@ function Statistics(props: StatisticsProps) {
                                         filteredRounds.map((r) => r.drawCRS),
                                         0.9
                                     )}</span></div>
-                                {/* {program === "No Program Specified" && (
-                                <>
-                                    <div>Programs:</div>
-                                    <div className="statValue program-list">
-                                        {lastRound &&
-                                            lastRound.drawText2
-                                                .split(",")
-                                                .map((t) => <li>{t.trim()}</li>)}
-                                    </div>
-                                </>
-                            )} */}
                             </div>
                             <div className="draw-stats statsPanel">
                                 {program === "No Program Specified" && (

@@ -12,7 +12,7 @@ const MainPage = () => {
             </Head>
             <div className="flex flex-col sm:m-1 md:mx-6 justify-start items-center grow gap-y-4">
                 <AppBar />
-                <div className="flex flex-col  w-full grow gap-8">
+                <div className="flex flex-col animate-pulse justify-center grow gap-8">
                     <h2>Coming soon!</h2>
                 </div>
             </div>

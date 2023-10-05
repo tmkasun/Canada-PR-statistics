@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 
 export const IconExternalLink = () => (
@@ -8,15 +9,16 @@ export const IconExternalLink = () => (
 );
 
 export default function AppBar({ children }: { children?: React.ReactNode }) {
-    const isLoading = false;
+    const location = useRouter();
+    const { pathname } = location;
     return (
         <div className={"p-2 font-semibold border shadow rounded-2xl flex h-20 justify-between w-full items-center text-black"}>
             <Link className="flex justify-center items-center overflow-hidden h-16" href='/'>
                 <img className="overflow-hidden -ml-10" src="/images/HD-wordmark-white.gif" width={250} /> <h1 className="-ml-10 flex font-serif font-light justify-end items-end h-full mb-3 text-4xl ">PR Stats</h1>
             </Link>
             <div className="flex gap-x-10 flex-row">
-                <Link href="/" className="border-b-2   border-blue-600 p-3" >Express Entry</Link>
-                <Link href="/pnp" className=" border-blue-700 p-3" >Provincial Nominee </Link>
+                <Link href="/" className={`${pathname === "/" && "border-b-2   border-blue-600"} p-3`} >Express Entry</Link>
+                <Link href="/pnp" className={` ${pathname === "/pnp" && "border-b-2   border-blue-600"}  p-3`} >Provincial Nominee </Link>
             </div>
             {children}
 
