@@ -19,6 +19,7 @@ export default function AppBar({ children }: { children?: React.ReactNode }) {
             <div className="flex gap-x-10 flex-row">
                 <Link href="/" className={`${pathname === "/" && "border-b-2   border-blue-600"} p-3`} >Express Entry</Link>
                 <Link href="/pnp" className={` ${pathname === "/pnp" && "border-b-2   border-blue-600"}  p-3`} >Provincial Nominee </Link>
+                <Link href="https://lmia-stats.vercel.app/" className={` ${pathname === "/pnp" && "border-b-2   border-blue-600"}  p-3`} >LMIA</Link>
             </div>
             {children}
 
