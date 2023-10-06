@@ -20,6 +20,17 @@ module.exports = {
                 "gradient-conic":
                     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
             },
+            keyframes: {
+                scrollUp: {
+                    from: {
+                        transform: "translateY(0)"
+                    },
+                    to: { transform: "translateY(var(--item-count))" }
+                },
+            },
+            animation: {
+                goUp: "scrollUp 1.5s .16s forwards"
+            }
         },
     },
     plugins: [],

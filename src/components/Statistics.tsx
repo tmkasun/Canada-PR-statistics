@@ -123,7 +123,7 @@ function Statistics(props: StatisticsProps) {
     }
     return (
         <>
-            <div className="grid-cols-3 sm:grid-cols-4 700 w-full grid border rounded-lg">
+            <div className="grid-cols-2 grid-rows-2 sm:grid-rows-none sm:grid-cols-4 700 w-full grid border rounded-lg">
                 <ProgramCard isLatest={data && data.rounds[0].drawName === program} program={filteredLastRound} />
                 <StatsCard onClick={() => setYParam("drawCRS")} label="CRS Score" invert value={filteredLastRound?.drawCRS || -1} lastValue={beforeFilteredLastRound?.drawCRS} />
                 <StatsCard onClick={() => setYParam("drawSize")} label="Draw Size" value={filteredLastRound?.drawSize || -1} lastValue={beforeFilteredLastRound?.drawSize} />
