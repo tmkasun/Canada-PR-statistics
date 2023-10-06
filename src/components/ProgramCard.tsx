@@ -20,7 +20,7 @@ export default function ProgramCard(props: IStatsCard) {
     const { program, isLatest = false } = props;
     const [isToolTipOpen, setIsToolTipOpen] = useState(false);
     return (
-        <div className={"relative flex border-l-2 gap-y-4 first:rounded-l-lg last:rounded-r-lg first:border-none flex-col px-8 py-10 bg-gradient-to-br via-white to-white"}>
+        <div className={"relative sm:flex hidden sm:visible border-l-2 gap-y-4 first:rounded-l-lg last:rounded-r-lg first:border-none flex-col px-8 py-10 bg-gradient-to-br via-white to-white"}>
             <div className="flex  justify-between">
                 <Link href={DRAW_ENDPOINT + program?.drawNumber} target="_blank" className="text-blue-600 font-semibold flex justify-center items-center gap-1">
                     #{program?.drawNumber} <IconExternalLink />

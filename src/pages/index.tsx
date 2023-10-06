@@ -11,7 +11,7 @@ const MainPage = () => {
             <Head>
                 <title>Canada PR Statistics</title>
             </Head>
-            <div className="flex flex-col sm:m-1 md:mx-6 justify-start items-center grow gap-y-4">
+            <div className="flex flex-col m-1 mt-0 sm:mx-6 justify-start items-center grow gap-y-4">
                 <AppBar />
                 <div className="flex flex-col w-full grow gap-8">
                     {!isLoading && <Statistics isLoading={isLoading} data={data} />}

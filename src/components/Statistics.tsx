@@ -123,18 +123,18 @@ function Statistics(props: StatisticsProps) {
     }
     return (
         <>
-            <div className="grid-cols-4 700 w-full grid border rounded-lg">
+            <div className="grid-cols-3 sm:grid-cols-4 700 w-full grid border rounded-lg">
                 <ProgramCard isLatest={data && data.rounds[0].drawName === program} program={filteredLastRound} />
                 <StatsCard onClick={() => setYParam("drawCRS")} label="CRS Score" invert value={filteredLastRound?.drawCRS || -1} lastValue={beforeFilteredLastRound?.drawCRS} />
                 <StatsCard onClick={() => setYParam("drawSize")} label="Draw Size" value={filteredLastRound?.drawSize || -1} lastValue={beforeFilteredLastRound?.drawSize} />
                 <StatsCard onClick={() => setYParam("dd18")} label="Pool size" invert value={parseInt(filteredLastRound?.dd18 || "")} lastValue={parseInt(beforeFilteredLastRound?.dd18 || "")} />
             </div>
-            <div className="flex justify-between items-center">
-                <div className="flex gap-x-8">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div className="flex flex-col sm:flex-row w-full sm:w-fit gap-8">
                     <div className="w-80 ">
                         <Selector marked={data && data.rounds[0].drawName || undefined} label="Program:" data={programs.map(p => ({ name: p, key: p }))} value={program} onChange={(newP) => setProgram(newP.key)} />
                     </div>
-                    <div className="flex justify-center items-center gap-x-6">
+                    <div className="flex justify-center items-center gap-6">
                         <div >In Last </div>
                         <div className="flex justify-center gap-x-4 items-center">
                             <button className={`py-1 px-2 cursor-pointer border-b-2 ${duration === "t" ? "bg-blue-50 border-blue-600" : "hover:bg-slate-50 border-gray-300"}`} onClick={() => setDuration("t")}>
@@ -156,16 +156,9 @@ function Statistics(props: StatisticsProps) {
                 </div>
             </div>
             {filteredLastRound && lineChartOptions && (
-                <div className="flex flex-row-reverse">
-                    <div className="grow">
-                        {!isLoading && lineChartOptions && (
-                            Array.isArray(lineChartOptions.series) && lineChartOptions.series[0].type === "bar" ?
-                                (<REBarChart id="c2" options={lineChartOptions} />) : (<LineChart id="c1" options={lineChartOptions} />)
-                        )}
-                    </div>
-
+                <div className="flex flex-col-reverse sm:flex-row">
                     <div className="flex flex-col gap-y-4">
-                        <div className="p-7 flex flex-col justify-start gap-6 rounded-2xl border border-gray-100 bg-gray-50 w-72">
+                        <div className="p-7 flex flex-col justify-start gap-6 rounded-2xl border border-gray-100 bg-gray-50 w-full sm:w-72">
                             <h2 className="text-gray-950 text-xl font-semibold leading-6">Statistics</h2>
                             <div className="flex flex-col gap-3">
                                 <div className="flex text-gray-500 justify-between items-center">Total Draws <span className="text-indigo-900 font-semibold">{totalDraws}</span></div>
@@ -179,7 +172,7 @@ function Statistics(props: StatisticsProps) {
                                         0.9
                                     )}</span></div>
                             </div>
-                            <div className="draw-stats statsPanel">
+                            <div className="draw-stats statsPanel w-full sm:w-fit">
                                 {program === "No Program Specified" && (
                                     <>
                                         <div>Next Potential Draw:</div>
@@ -205,7 +198,7 @@ function Statistics(props: StatisticsProps) {
                                 )}
                             </div>
                         </div>
-                        <div className="py-7 flex flex-col justify-start gap-6 rounded-2xl border border-gray-100 bg-gray-50 w-72">
+                        <div className="py-7 flex flex-col w-full justify-start gap-6 rounded-2xl border border-gray-100 bg-gray-50 sm:w-72">
                             <h2 className="text-gray-950 text-xl px-7 font-semibold leading-6">Recent Draws</h2>
                             <div className="px-3">
                                 <Activities onClick={(drawNumber) => {
@@ -216,6 +209,12 @@ function Statistics(props: StatisticsProps) {
                                 }} data={latest10Rounds} />
                             </div>
                         </div>
+                    </div>
+                    <div className="grow w-full sm:w-fit">
+                        {!isLoading && lineChartOptions && (
+                            Array.isArray(lineChartOptions.series) && lineChartOptions.series[0].type === "bar" ?
+                                (<REBarChart id="c2" options={lineChartOptions} />) : (<LineChart id="c1" options={lineChartOptions} />)
+                        )}
                     </div>
                 </div>
             )
