@@ -2,8 +2,15 @@ import { Resend } from 'resend';
 import { initMongo } from './libs/mongo';
 import { Draw } from './libs/types';
 const { resendAPIKey } = require("./configs.json");
+import { JSDOM } from 'jsdom';
+
+const path = require('path');
+const filePath = path.join(__dirname, 'resources/ee_pr.html');
+
 
 (async () => {
+    const emailTemplate = await JSDOM.fromFile(filePath);
+    const header = emailTemplate.window.document.querySelector('#draw-header')
     const db = await initMongo();
     try {
         console.log("Fetching IRCC data!")
@@ -21,18 +28,20 @@ const { resendAPIKey } = require("./configs.json");
         console.log(`Found last draw from mongo = ${lastKnownDraw?.lastDraw}!`)
         const latestDrawNumber = parseInt(latestRound.drawNumber);
         console.log(`Latest Draw number ${latestDrawNumber}`);
-        debugger;
         if (latestDrawNumber > lastKnownDraw?.lastDraw) {
             console.log(`Found a new draw ${latestDrawNumber}`)
 
             const aa = await db.updateOne({ _id: { $eq: lastKnownDraw?._id } }, { $set: { lastDraw: latestDrawNumber } })
             const resend = new Resend(resendAPIKey);
-            console.log(`Sending email!`)
+            console.log(`Sending email!`);
+            if (header) {
+                header.innerHTML = latestRound.drawName;
+            }
             const a = await resend.emails.send({
                 from: 'noreply@send.knnect.com',
                 to: 'tmkasun@gmail.com',
-                subject: 'New PR draws detected!',
-                html: `${Object.entries(latestRound).map(([k, v]) => `${k} => ${v}`).join('</br>')}`
+                subject: `New PR draw round ${latestDrawNumber} detected!`,
+                html: emailTemplate.serialize()
             });
         } else {
             console.log("No new draws!")
