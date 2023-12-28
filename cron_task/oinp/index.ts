@@ -36,7 +36,11 @@ export const getDrawsFromOINP = async (): Promise<OINPDraws> => {
     const draws = new Set();
     const drawsMap: { [key: string]: string } = {};
 
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({
+        headless: true,
+        executablePath: '/usr/bin/chromium-browser',
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
     const page = await browser.newPage();
     // Visit the page and wait until network connections are completed
     await page.goto(pUpdates2023, { waitUntil: 'networkidle2' });
