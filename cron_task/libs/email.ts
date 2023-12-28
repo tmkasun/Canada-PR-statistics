@@ -6,7 +6,7 @@ import logger from "./logger";
 import { OINPDraw } from "../oinp";
 
 const path = require('path');
-const filePath = path.join(__dirname, '../ee_pr.html');
+const filePath = path.join(__dirname, '../resources/ee_pr.html');
 
 let resendInstance: Resend | null = null;
 const initResend = (): Resend => {
