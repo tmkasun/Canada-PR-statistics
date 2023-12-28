@@ -38,8 +38,8 @@ export const sendEEEmail = async (latestDrawFromIRCC: Draw, latestDrawNumberFrom
     }
     const emailDone = await sendEmail(
         subscribers.ee,
+        emailTemplate.serialize(),
         `New PR draw round ${latestDrawNumberFromIRCC} detected!`,
-        emailTemplate.serialize()
     );
     return emailDone
 }
@@ -52,8 +52,8 @@ export const sendOINPEmail = async (oinpRound: OINPDraw) => {
     }
     const emailDone = await sendEmail(
         subscribers.oinp,
+        emailTemplate.serialize(),
         `New OINP Invitation Round detected!`,
-        emailTemplate.serialize()
     );
     return emailDone
 }
