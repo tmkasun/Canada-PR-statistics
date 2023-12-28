@@ -1,59 +1,74 @@
-import { Resend } from 'resend';
 import { initMongo } from './libs/mongo';
 import { Draw } from './libs/types';
-const { resendAPIKey } = require("./configs.json");
-import { JSDOM } from 'jsdom';
+import { Collection } from 'mongodb';
+import { getDrawsFromOINP, getLatestOINPFromDB } from './oinp';
+import logger from './libs/logger';
+import { sendEEEmail, sendOINPEmail } from './libs/email';
 
-const path = require('path');
-const filePath = path.join(__dirname, 'resources/ee_pr.html');
+const IRCC_DATA_JSON = "https://www.canada.ca/content/dam/ircc/documents/json/ee_rounds_123_en.json"
+
+const getLatestDrawFromIRCC = async () => {
+    logger.info("Fetching IRCC data!")
+    const res = await fetch(
+        IRCC_DATA_JSON
+    );
+    const data = await res.json();
+    logger.info("IRCC data fetched!")
+    const latestRound: Draw = data.rounds[0];
+    return latestRound;
+}
+
+const getLatestDrawFromDB = async (db: Collection<Document> & {
+    close?: ((force?: boolean | undefined) => Promise<void>)
+}, latestDrawNumber: number) => {
+    logger.info("Finding last draw from mongo . . .");
+    let lastKnownDraw = await db.findOne<{ lastDraw: number, _id: any }>({ program: 'ee' });
+    if (!lastKnownDraw) {
+        const done = await db.insertOne({ "program": 'ee', lastDraw: latestDrawNumber } as any);
+        lastKnownDraw = { lastDraw: -1, _id: -1 }
+    } else {
+        logger.info(`Found last draw from mongo = ${lastKnownDraw?.lastDraw}!`)
+    }
+
+    return lastKnownDraw
+}
 
 
 (async () => {
-    const emailTemplate = await JSDOM.fromFile(filePath);
-    const header = emailTemplate.window.document.querySelector('#draw-header')
-    const db = await initMongo();
+    const mongoCollection = await initMongo();
     try {
-        console.log("Fetching IRCC data!")
-        const res = await fetch(
-            "https://www.canada.ca/content/dam/ircc/documents/json/ee_rounds_123_en.json"
-        );
-        const data = await res.json();
-        console.log("IRCC data fetched!")
-        const latestRound: Draw = data.rounds[0];
-        console.log("Finding last draw from mongo . . .")
-        const lastKnownDraw = await db.findOne<{ lastDraw: number, _id: any }>();
-        if (!lastKnownDraw) {
-            return
-        }
-        console.log(`Found last draw from mongo = ${lastKnownDraw?.lastDraw}!`)
-        const latestDrawNumber = parseInt(latestRound.drawNumber);
-        console.log(`Latest Draw number ${latestDrawNumber}`);
-        if (latestDrawNumber > lastKnownDraw?.lastDraw) {
-            console.log(`Found a new draw ${latestDrawNumber}`)
+        const latestDrawFromIRCC = await getLatestDrawFromIRCC();
+        const latestDrawNumberFromIRCC = parseInt(latestDrawFromIRCC.drawNumber);
+        const latestDrawFromDB = await getLatestDrawFromDB(mongoCollection, latestDrawNumberFromIRCC);
 
-            const aa = await db.updateOne({ _id: { $eq: lastKnownDraw?._id } }, { $set: { lastDraw: latestDrawNumber } })
-            const resend = new Resend(resendAPIKey);
-            console.log(`Sending email!`);
-            if (header) {
-                header.innerHTML = latestRound.drawName;
-            }
-            const a = await resend.emails.send({
-                from: 'noreply@send.knnect.com',
-                to: 'tmkasun@gmail.com',
-                subject: `New PR draw round ${latestDrawNumber} detected!`,
-                html: emailTemplate.serialize()
-            });
+        logger.info(`Latest IRCC Draw number ${latestDrawNumberFromIRCC}`);
+        if (latestDrawNumberFromIRCC > latestDrawFromDB.lastDraw) {
+            logger.info(`Found a new draw ${latestDrawNumberFromIRCC}`)
+            const done = await mongoCollection.updateOne({ _id: { $eq: latestDrawFromDB?._id } }, { $set: { lastDraw: latestDrawNumberFromIRCC } })
+            await sendEEEmail(latestDrawFromIRCC, latestDrawNumberFromIRCC)
         } else {
-            console.log("No new draws!")
+            logger.info("No new draws!")
         }
-        debugger;
+        logger.info(`Checking OINP invitations!`)
+        const latestsOINPsfromOntarioCa = await getDrawsFromOINP();
+        const [latestOINPFromWeb] = latestsOINPsfromOntarioCa;
+        const latestOINPFromDB = await getLatestOINPFromDB(mongoCollection, latestOINPFromWeb.date);
+        debugger
+
+        if (latestOINPFromWeb.date > latestOINPFromDB.lastDraw) {
+            logger.info(`Found a new OINP invitation round from web: ${latestOINPFromWeb}`);
+            const done = await mongoCollection.updateOne({ _id: { $eq: latestOINPFromDB._id } }, { $set: { lastDraw: latestOINPFromWeb.date } })
+            sendOINPEmail(latestOINPFromWeb)
+        } else {
+            logger.info(`No new OINP invitations found!`)
+        }
     } catch (error) {
         debugger;
-        console.error(error)
+        logger.error(error)
 
     } finally {
-        console.warn("Closing mongo connection!")
-        db.close && db.close();
+        logger.warn("Closing mongo connection!")
+        mongoCollection.close && mongoCollection.close();
     }
 })()
 

@@ -1,4 +1,5 @@
 import { Collection, MongoClient, ServerApiVersion } from "mongodb";
+import logger from "./logger";
 var { password, database: dbName, collection: collectionName } = require("../configs.json");
 
 const uri = `mongodb+srv://nodeuser:${password}@ircc.3wwmdgf.mongodb.net/?retryWrites=true&w=majority`;
@@ -19,10 +20,10 @@ export async function initMongo() {
     database = await client.db(dbName);
     database.command({ ping: 1 });
 
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    logger.info("Pinged your deployment. You successfully connected to MongoDB!");
 
-    const col: Collection<Document> & { close?: (force?: boolean) => Promise<void> } = await database.collection(collectionName);
-    col.close = client.close.bind(client);
-    return col;
+    const collection: Collection<Document> & { close?: (force?: boolean) => Promise<void> } = await database.collection(collectionName);
+    collection.close = client.close.bind(client);
+    return collection;
 }
 

@@ -5,3 +5,5 @@ configs.json
 build
 ./configs.json
 configs.json
+error.log
+combined.log
