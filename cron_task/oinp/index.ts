@@ -35,28 +35,32 @@ export const getDrawsFromOINP = async (): Promise<OINPDraws> => {
     logger.info("Fetching latest OINP invitations from ontario.ca website...")
     const draws = new Set();
     const drawsMap: { [key: string]: string } = {};
-
     const browser = await puppeteer.launch({
         headless: true,
         executablePath: '/usr/bin/chromium-browser',
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
-    const page = await browser.newPage();
-    // Visit the page and wait until network connections are completed
-    await page.goto(pUpdates2023, { waitUntil: 'networkidle2' });
-    const drawHeaders = await page.$$('h3');
+    try {
+        const page = await browser.newPage();
+        // Visit the page and wait until network connections are completed
+        await page.goto(pUpdates2023, { waitUntil: 'networkidle2' });
+        const drawHeaders = await page.$$('h3');
 
-    await Promise.all(drawHeaders?.map(async (drawHeader) => {
-        let drawDate = await drawHeader.evaluate(el => el.textContent) as string;
-        drawDate = drawDate.trim();
-        const drawDetails = await page.evaluateHandle(el => el.nextElementSibling, drawHeader);
-        const drawDetailsText = await (await drawDetails.getProperty('innerHTML')).jsonValue() as string;
+        await Promise.all(drawHeaders?.map(async (drawHeader) => {
+            let drawDate = await drawHeader.evaluate(el => el.textContent) as string;
+            drawDate = drawDate.trim();
+            const drawDetails = await page.evaluateHandle(el => el.nextElementSibling, drawHeader);
+            const drawDetailsText = await (await drawDetails.getProperty('innerHTML')).jsonValue() as string;
 
-        if (!draws.has(drawDate)) {
-            draws.add(drawDate);
-            drawsMap[drawDate] = drawDetailsText
-        }
-    }))
+            if (!draws.has(drawDate)) {
+                draws.add(drawDate);
+                drawsMap[drawDate] = drawDetailsText
+            }
+        }))
+    } finally {
+        browser.close();
+    }
+
     const sortedDraws: OINPDraws = Array.from(draws).map((draw) => {
         return { date: new Date(draw as string), details: drawsMap[draw as string] }
     }).sort((a: any, b: any) => b.date - a.date);
