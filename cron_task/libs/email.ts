@@ -17,16 +17,21 @@ const initResend = (): Resend => {
     return resendInstance
 }
 
-export const sendEmail = async (to: string[], html: string, subject: string) => {
+export const sendEmail = async (to: string[] | string, html: string, subject: string) => {
     const resend = initResend();
     logger.info(`Sending email! ${subject}`);
+    let emailDone = null;
+    try {
+        emailDone = await resend.emails.send({
+            from: 'noreply@send.knnect.com',
+            to,
+            subject,
+            html,
+        });
+    } catch (error) {
+        debugger
+    }
 
-    const emailDone = await resend.emails.send({
-        from: 'noreply@send.knnect.com',
-        to: to.join(','),
-        subject,
-        html,
-    });
     return emailDone
 }
 
