@@ -3,7 +3,9 @@ import axios from 'axios';
 import puppeteer from 'puppeteer';
 import logger from '../libs/logger';
 import { Collection } from 'mongodb';
-const pUpdates2023 = "https://www.ontario.ca/page/2023-ontario-immigrant-nominee-program-updates";
+
+// Change the URL when year changes
+const pUpdates2023 = "https://www.ontario.ca/page/2024-ontario-immigrant-nominee-program-updates";
 const noi = "https://www.ontario.ca/page/oinp-express-entry-notifications-interest";
 
 export type OINPDraw = { date: Date, details: string }
@@ -31,13 +33,16 @@ export const getLatestOINPFromDB = async (mongoCollection: Collection<Document> 
     return lastKnownDraw
 }
 
+/**
+ * Fetches the latest OINP invitations from ontario.ca website and returns the sorted list of draws.
+ */
 export const getDrawsFromOINP = async (): Promise<OINPDraws> => {
     logger.info("Fetching latest OINP invitations from ontario.ca website...")
     const draws = new Set();
     const drawsMap: { [key: string]: string } = {};
     const browser = await puppeteer.launch({
         headless: true,
-        executablePath: '/usr/bin/chromium-browser',
+        executablePath: '/usr/bin/chromium-browser', // NOTE: Comment this out when local debugging
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
     try {
@@ -68,4 +73,5 @@ export const getDrawsFromOINP = async (): Promise<OINPDraws> => {
     return sortedDraws
 }
 
-getDrawsFromOINP()
+// Uncomment to test, otherwise this file is used as a module
+// getDrawsFromOINP()

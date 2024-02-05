@@ -7,6 +7,7 @@ import { OINPDraw } from "../oinp";
 
 const path = require('path');
 const filePath = path.join(__dirname, '../resources/ee_pr.html');
+const oinpEmailTemplate = path.join(__dirname, '../resources/oinp_email.html');
 
 let resendInstance: Resend | null = null;
 const initResend = (): Resend => {
@@ -50,7 +51,7 @@ export const sendEEEmail = async (latestDrawFromIRCC: Draw, latestDrawNumberFrom
 }
 
 export const sendOINPEmail = async (oinpRound: OINPDraw) => {
-    const emailTemplate = await JSDOM.fromFile(filePath);
+    const emailTemplate = await JSDOM.fromFile(oinpEmailTemplate);
     const header = emailTemplate.window.document.querySelector('#draw-header')
     if (header) {
         header.innerHTML = oinpRound.details;
