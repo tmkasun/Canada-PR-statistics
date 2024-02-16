@@ -30,7 +30,7 @@ export const useIRCCData = (isMocked=false) => {
         });
       }
       const res = await fetch(
-        "https://www.canada.ca/content/dam/ircc/documents/json/ee_rounds_123_en.json?wbCacheBust=foo"
+        `https://www.canada.ca/content/dam/ircc/documents/json/ee_rounds_123_en.json?hukCacheBust=${new Date().getTime()}`
       );
       const data = await res.json();
       if (!isStale) {
