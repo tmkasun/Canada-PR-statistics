@@ -104,7 +104,10 @@ const WaterfallChart = (props: { id: string; filteredLastRound: IRound }) => {
             data: (function () {
                 let list = [];
                 for (let i = 0; i < draws.length; i++) {
-                    list.push(dataPointToRangeMap[draws[i][0]]);
+                    const thisDraw = draws[
+                        i
+                    ][0] as keyof typeof dataPointToRangeMap;
+                    list.push(dataPointToRangeMap[thisDraw]);
                 }
                 return list;
             })(),
@@ -140,7 +143,7 @@ const WaterfallChart = (props: { id: string; filteredLastRound: IRound }) => {
                     position: "top",
                 },
                 data: draws.map(([step, value], index) =>
-                    aggregatedIndexes.includes(step) ? value : "-"
+                    aggregatedIndexes.includes(step as string) ? value : "-"
                 ),
             },
             {
@@ -151,8 +154,8 @@ const WaterfallChart = (props: { id: string; filteredLastRound: IRound }) => {
                     show: true,
                     position: "bottom",
                 },
-                data: draws.map(([step, value], index) =>
-                    aggregatedIndexes.includes(step) ? "-" : value
+                data: draws.map(([step, value]) =>
+                    aggregatedIndexes.includes(step as string) ? "-" : value
                 ),
                 markPoint: {
                     data: [
