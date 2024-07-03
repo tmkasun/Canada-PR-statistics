@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import mockData from "./mockData";
 import { IIRCCData } from "./consts";
 
-export const clearAndParseNumber = (numberInString: string) => {
+export const clearAndParseNumber = (numberInString: string | number) => {
   let parsedNumber;
- 
+  if (typeof numberInString !== "string") {
+    return numberInString;
+  }
+
   try {
     parsedNumber = parseInt(numberInString.replace(/,/g, ""));
   } catch (error) {
@@ -13,15 +16,15 @@ export const clearAndParseNumber = (numberInString: string) => {
   }
   return parsedNumber;
 };
-export const useIRCCData = (isMocked=false) => {
-  const [data, setData] = useState<null| IIRCCData>(null);
+export const useIRCCData = (isMocked = false) => {
+  const [data, setData] = useState<null | IIRCCData>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     let isStale = false;
     (async () => {
       setIsLoading(true);
-      if(isMocked) {
+      if (isMocked) {
         return await new Promise((r) => {
           setTimeout(() => {
             setData(mockData as any);
