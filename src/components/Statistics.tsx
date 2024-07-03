@@ -1,145 +1,147 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react";
 import {
     DRAW_ENDPOINT,
     IIRCCData,
     IRound,
     PROGRAMS,
     SUPPORTED_PARAMS,
-} from "../data/consts"
+} from "../data/consts";
 
-import { quantile, mean, min } from "simple-statistics"
-import { clearAndParseNumber } from "../data/api"
-import { EChartsOption } from "echarts"
-import getChartOptions from "../data/chartOptions"
-import Selector from "./Selector"
-import REBarChart from "./BarChart"
-import LineChart from "./LineChart"
-import StatsCard from "./StatsCard"
-import ProgramCard from "./ProgramCard"
+import { quantile, mean, min } from "simple-statistics";
+import { clearAndParseNumber } from "../data/api";
+import { EChartsOption } from "echarts";
+import getChartOptions from "../data/chartOptions";
+import Selector from "./Selector";
+import REBarChart from "./BarChart";
+import LineChart from "./LineChart";
+import StatsCard from "./StatsCard";
+import ProgramCard from "./ProgramCard";
 
-import customParseFormat from "dayjs/plugin/customParseFormat"
-import dayjs from "dayjs"
-import relativeTime from "dayjs/plugin/relativeTime"
-import calendar from "dayjs/plugin/calendar"
-import { Activities, IActivity } from "./Activities"
-import WaterfallChart from "./WaterfallChart"
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import calendar from "dayjs/plugin/calendar";
+import { Activities, IActivity } from "./Activities";
+import WaterfallChart from "./WaterfallChart";
 
-dayjs.extend(customParseFormat)
-dayjs.extend(relativeTime)
-dayjs.extend(calendar)
+dayjs.extend(customParseFormat);
+dayjs.extend(relativeTime);
+dayjs.extend(calendar);
 
 type StatisticsProps = {
-    data: IIRCCData | null
-    isLoading?: boolean
-}
+    data: IIRCCData | null;
+    isLoading?: boolean;
+};
 
 function Statistics(props: StatisticsProps) {
-    const { isLoading, data } = props
-    const [program, setProgram] = useState(PROGRAMS[1])
-    const [selectedRound, setSelectedRound] = useState<null | IRound>(null)
-    const [filteredRounds, setFilteredRounds] = useState<null | IRound[]>(null)
-    const [yParam, setYParam] = useState<keyof IRound>("drawCRS")
-    const [duration, setDuration] = useState("a")
-    const [programs, setPrograms] = useState<string[]>(PROGRAMS)
+    const { isLoading, data } = props;
+    const [program, setProgram] = useState(PROGRAMS[1]);
+    const [selectedRound, setSelectedRound] = useState<null | IRound>(null);
+    const [filteredRounds, setFilteredRounds] = useState<null | IRound[]>(null);
+    const [yParam, setYParam] = useState<keyof IRound>("drawCRS");
+    const [duration, setDuration] = useState("a");
+    const [programs, setPrograms] = useState<string[]>(PROGRAMS);
     const [lineChartOptions, setLineChartOptions] =
-        useState<null | EChartsOption>(null)
+        useState<null | EChartsOption>(null);
 
     const latest80Rounds = useMemo(() => {
-        let latest80Rounds: IActivity[] = []
+        let latest80Rounds: IActivity[] = [];
         if (data) {
             latest80Rounds = data.rounds.slice(0, 80).map((round) => {
-                const parsedDateTime = dayjs(round.drawDate)
+                const parsedDateTime = dayjs(round.drawDate);
                 if (!parsedDateTime.isValid()) {
                     throw new Error(
                         `Error parsing the date time => ${round.drawDate}`
-                    )
+                    );
                 } else {
                     return {
                         name: round.drawName,
                         time: parsedDateTime,
                         id: round.drawNumber,
-                    }
+                    };
                 }
-            })
+            });
         }
-        return latest80Rounds
-    }, [data])
+        return latest80Rounds;
+    }, [data]);
 
     useEffect(() => {
         if (!data) {
-            return
+            return;
         }
-        const xAxisData = []
-        const dataPoints = []
-        const draws = [...data.rounds].reverse()
-        const filteredRounds: IRound[] = []
-        const programs = new Set<string>()
+        const xAxisData = [];
+        const dataPoints = [];
+        const draws = [...data.rounds].reverse();
+        const filteredRounds: IRound[] = [];
+        const programs = new Set<string>();
         for (let round of draws) {
-            programs.add(round.drawName)
+            programs.add(round.drawName);
             const checkYear = (year: string, duration: string) => {
                 switch (duration) {
                     case "a":
-                        return true
+                        return true;
                     case "t":
-                        return year.includes("2024")
+                        return year.includes("2024");
                     case "l":
-                        return year.includes("2023")
+                        return year.includes("2023");
                     case "lt":
-                        return year.includes("2024") || year.includes("2023")
+                        return year.includes("2024") || year.includes("2023");
                     default:
-                        return true
+                        return true;
                 }
-            }
+            };
             if (
                 round.drawName === program &&
                 checkYear(round.drawDate, duration)
             ) {
-                xAxisData.push(round.drawDate)
-                const parameter = clearAndParseNumber(round[yParam] as string)
-                dataPoints.push(parameter)
+                xAxisData.push(round.drawDate);
+                const parameter = clearAndParseNumber(round[yParam] as string);
+                dataPoints.push(parameter);
                 filteredRounds.push(
                     Object.fromEntries(
                         Object.entries(round).map(
                             ([key, value]: [string, string]) => {
                                 if (SUPPORTED_PARAMS.includes(key)) {
-                                    return [key, clearAndParseNumber(value)]
+                                    return [key, clearAndParseNumber(value)];
                                 }
-                                return [key, value]
+                                return [key, value];
                             }
                         )
                     )
-                )
+                );
             }
         }
-        xAxisData.unshift("date")
-        dataPoints.unshift(program)
-        setFilteredRounds(filteredRounds)
-        const yAxisData = dataPoints
-        const chartType = xAxisData.length > 5 ? "line" : "bar"
-        let opts = getChartOptions(yParam, xAxisData, yAxisData, chartType)
-        setLineChartOptions(opts as EChartsOption)
-        setPrograms([...programs])
-    }, [program, data, yParam, duration])
+        xAxisData.unshift("date");
+        dataPoints.unshift(program);
+        setFilteredRounds(filteredRounds);
+        const yAxisData = dataPoints;
+        const chartType = xAxisData.length > 5 ? "line" : "bar";
+        let opts = getChartOptions(yParam, xAxisData, yAxisData, chartType);
+        setLineChartOptions(opts as EChartsOption);
+        setPrograms([...programs]);
+    }, [program, data, yParam, duration]);
 
     useEffect(() => {
         if (data) {
-            setProgram(data.rounds[0].drawName)
+            setProgram(data.rounds[0].drawName);
         }
-    }, [data])
+    }, [data]);
 
-    let filteredLastRound = null
-    let beforeFilteredLastRound = null
-    const isDataAvailable = lineChartOptions
+    let filteredLastRound = null;
+    let beforeFilteredLastRound = null;
+    const isDataAvailable = lineChartOptions;
     if (filteredRounds) {
         filteredLastRound =
-            selectedRound || filteredRounds[filteredRounds.length - 1]
-        beforeFilteredLastRound = filteredRounds[filteredRounds.length - 2]
+            selectedRound || filteredRounds[filteredRounds.length - 1];
+        beforeFilteredLastRound = filteredRounds[filteredRounds.length - 2];
     }
 
-    let totalDraws
+    let totalDraws;
     if (isDataAvailable) {
-        const xAxisData = lineChartOptions?.xAxis as NonNullable<{ data: [] }[]>
-        totalDraws = xAxisData[0].data.length - 1
+        const xAxisData = lineChartOptions?.xAxis as NonNullable<
+            { data: [] }[]
+        >;
+        totalDraws = xAxisData[0].data.length - 1;
     }
 
     return (
@@ -181,8 +183,8 @@ function Statistics(props: StatisticsProps) {
                             data={programs.map((p) => ({ name: p, key: p }))}
                             value={program}
                             onChange={(newP) => {
-                                setProgram(newP.key)
-                                setSelectedRound(null)
+                                setProgram(newP.key);
+                                setSelectedRound(null);
                             }}
                         />
                     </div>
@@ -337,10 +339,10 @@ function Statistics(props: StatisticsProps) {
                                             const program = data?.rounds.find(
                                                 (r) =>
                                                     r.drawNumber === drawNumber
-                                            )
+                                            );
                                             if (program) {
-                                                setProgram(program.drawName)
-                                                setSelectedRound(program)
+                                                setProgram(program.drawName);
+                                                setSelectedRound(program);
                                             }
                                         }}
                                         data={latest80Rounds}
@@ -380,7 +382,7 @@ function Statistics(props: StatisticsProps) {
                 </>
             )}
         </>
-    )
+    );
 }
 
-export default Statistics
+export default Statistics;
