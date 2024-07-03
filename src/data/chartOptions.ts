@@ -45,6 +45,7 @@ export default function getChartOptions(yParam: string, xAxisData: any[], yAxisD
                 emphasis: { focus: "series" },
                 name: yParam,
                 type: "line",
+                triggerLineEvent: true,
             }
         ],
         barMaxWidth: "20%"

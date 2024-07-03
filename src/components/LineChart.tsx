@@ -6,7 +6,7 @@ import {
   TitleComponent,
   TooltipComponent,
   LegendComponent,
-  ToolboxComponent
+  ToolboxComponent,
 } from "echarts/components";
 import { LineChart } from "echarts/charts";
 import { CanvasRenderer } from "echarts/renderers";
@@ -20,10 +20,10 @@ echarts.use([
   LegendComponent,
   LineChart,
   CanvasRenderer,
-  ToolboxComponent
+  ToolboxComponent,
 ]);
 
-const REChart: React.FC<{ id: string, options: EChartsOption }> = (props) => {
+const REChart: React.FC<{ id: string; options: EChartsOption }> = (props) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
   const chartRefInst = useRef<ECharts | null>(null);
   const { id, options } = props;
@@ -33,12 +33,14 @@ const REChart: React.FC<{ id: string, options: EChartsOption }> = (props) => {
     }
   }, [options]);
   useEffect(() => {
-    console.log(chartRef.current);
     if (chartRef.current) {
       const lineChart =
         echarts.getInstanceByDom(chartRef.current) ||
         echarts.init(chartRef.current);
       lineChart.setOption(options, true);
+      lineChart.on("click", function (params) {
+        // TODO: Add click event
+      });
       chartRefInst.current = lineChart as unknown as EChartsType;
     }
   }, []);

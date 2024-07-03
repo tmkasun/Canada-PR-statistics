@@ -7,33 +7,34 @@ import {
     TooltipComponent,
     GridComponent,
     LegendComponent,
+    MarkLineComponent,
 } from "echarts/components";
 import { BarChart } from "echarts/charts";
 import { CanvasRenderer } from "echarts/renderers";
-import { ECharts, EChartsOption, EChartsType } from "echarts";
+import { ECharts, EChartsType } from "echarts";
 import { cumulativeSum } from "~/utils/utils";
 import { clearAndParseNumber } from "~/data/api";
 import { IRound } from "~/data/consts";
 
 const dataPointToRangeMap = {
-    dd1: "601-1200",
-    dd2: "501-600",
-    dd3: "451-500",
-    dd4: "491-500",
-    dd5: "481-490",
-    dd6: "471-480",
-    dd7: "461-470",
-    dd8: "451-460",
-    dd9: "401-450",
-    dd10: "441-450",
-    dd11: "431-440",
-    dd12: "421-430",
-    dd13: "411-420",
-    dd14: "401-410",
-    dd15: "351-400",
-    dd16: "301-350",
-    dd17: "0 - 300",
-    dd18: "Total",
+    dd1: { label: "601-1200", min: 601, max: 1200 },
+    dd2: { label: "501-600", min: 501, max: 600 },
+    dd3: { label: "451-500", min: 451, max: 500 },
+    dd4: { label: "491-500", min: 491, max: 500 },
+    dd5: { label: "481-490", min: 481, max: 490 },
+    dd6: { label: "471-480", min: 471, max: 480 },
+    dd7: { label: "461-470", min: 461, max: 470 },
+    dd8: { label: "451-460", min: 451, max: 460 },
+    dd9: { label: "401-450", min: 401, max: 450 },
+    dd10: { label: "441-450", min: 441, max: 450 },
+    dd11: { label: "431-440", min: 431, max: 440 },
+    dd12: { label: "421-430", min: 421, max: 430 },
+    dd13: { label: "411-420", min: 411, max: 420 },
+    dd14: { label: "401-410", min: 401, max: 410 },
+    dd15: { label: "351-400", min: 351, max: 400 },
+    dd16: { label: "301-350", min: 301, max: 350 },
+    dd17: { label: "0 - 300", min: 0, max: 300 },
+    dd18: { label: "Total", min: 0, max: 1200 },
 };
 
 const aggregatedIndexes = ["dd9", "dd3"];
@@ -46,6 +47,7 @@ echarts.use([
     LegendComponent,
     BarChart,
     CanvasRenderer,
+    MarkLineComponent,
 ]);
 
 const WaterfallChart = (props: { id: string; filteredLastRound: IRound }) => {
@@ -53,24 +55,32 @@ const WaterfallChart = (props: { id: string; filteredLastRound: IRound }) => {
     const chartRefInst = useRef<ECharts | null>(null);
     const { id, filteredLastRound } = props;
 
-    const draws =
+    const steps =
         Object.entries(filteredLastRound)
             .filter(([name]) => name.startsWith("dd"))
             .reverse()
             .map(([step, value]) => [step, clearAndParseNumber(value)])
             .slice(1) || [];
     let cumulativeApplicationsCount = cumulativeSum(
-        draws.map(([step, value]) => {
+        steps.map(([step, value]) => {
             return aggregatedIndexes.includes(step as string) ? 0 : value;
         }) as number[]
     );
-    const dd9 = draws.find(([step]) => step === "dd9") || [];
+    const dd9 = steps.find(([step]) => step === "dd9") || [];
     const dd9Val = dd9[1] as number;
-    const dd3 = draws.find(([step]) => step === "dd3") || [];
+    const dd3 = steps.find(([step]) => step === "dd3") || [];
     const dd3Val = dd3[1] as number;
     cumulativeApplicationsCount[8] = cumulativeApplicationsCount[9] - dd9Val;
     cumulativeApplicationsCount[14] = cumulativeApplicationsCount[15] - dd3Val;
+    const getCRSCutoffXAxis = () => {
+        const cutoff = filteredLastRound.drawCRS;
+        const range = Object.values(dataPointToRangeMap).find(
+            (range) => range.min <= cutoff && range.max >= cutoff
+        );
+        return range ? range.label : "0 - 300";
+    };
     const options = {
+        calculable: true,
         tooltip: {
             trigger: "axis",
             axisPointer: {
@@ -103,11 +113,11 @@ const WaterfallChart = (props: { id: string; filteredLastRound: IRound }) => {
             name: "CRS Score Range",
             data: (function () {
                 let list = [];
-                for (let i = 0; i < draws.length; i++) {
-                    const thisDraw = draws[
+                for (let i = 0; i < steps.length; i++) {
+                    const thisStep = steps[
                         i
                     ][0] as keyof typeof dataPointToRangeMap;
-                    list.push(dataPointToRangeMap[thisDraw]);
+                    list.push(dataPointToRangeMap[thisStep].label);
                 }
                 return list;
             })(),
@@ -142,7 +152,7 @@ const WaterfallChart = (props: { id: string; filteredLastRound: IRound }) => {
                     show: true,
                     position: "top",
                 },
-                data: draws.map(([step, value], index) =>
+                data: steps.map(([step, value], index) =>
                     aggregatedIndexes.includes(step as string) ? value : "-"
                 ),
             },
@@ -154,17 +164,21 @@ const WaterfallChart = (props: { id: string; filteredLastRound: IRound }) => {
                     show: true,
                     position: "bottom",
                 },
-                data: draws.map(([step, value]) =>
+                data: steps.map(([step, value]) =>
                     aggregatedIndexes.includes(step as string) ? "-" : value
                 ),
-                markPoint: {
-                    data: [
-                        { name: "Max", value: 182.2, xAxis: 7, yAxis: 183 },
-                        { name: "Min", value: 2.3, xAxis: 11, yAxis: 3 },
-                    ],
-                },
                 markLine: {
-                    data: [{ type: "average", name: "Avg" }],
+                    data: [{ name: "Cutoff CRS", xAxis: getCRSCutoffXAxis() }],
+                    label: {
+                        formatter: `Cutoff CRS: ${filteredLastRound.drawCRS}`,
+                        opacity: 1,
+                        fontSize: 15,
+                    },
+                    lineStyle: {
+                        color: "red",
+                        width: 2,
+                        opacity: 0.2,
+                    },
                 },
             },
         ],
@@ -175,7 +189,6 @@ const WaterfallChart = (props: { id: string; filteredLastRound: IRound }) => {
         }
     }, [options]);
     useEffect(() => {
-        console.log(chartRef.current);
         if (chartRef.current) {
             const barChart =
                 echarts.getInstanceByDom(chartRef.current) ||
