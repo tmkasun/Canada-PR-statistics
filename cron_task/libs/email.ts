@@ -35,7 +35,8 @@ export const sendEmail = async (
       html,
     });
   } catch (error) {
-    debugger;
+    logger.error(`Error sending email! ${error}`);
+    logger.error(error);
   }
 
   return emailDone;
