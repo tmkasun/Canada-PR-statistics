@@ -83,4 +83,4 @@ export const getDrawsFromOINP = async (): Promise<OINPDraws> => {
 }
 
 // Uncomment to test, otherwise this file is used as a module
-getDrawsFromOINP()
+// getDrawsFromOINP()
