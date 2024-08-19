@@ -55,14 +55,23 @@ export const getDrawsFromOINP = async (): Promise<OINPDraws> => {
             let drawDate = await drawHeader.evaluate(el => el.textContent) as string;
             drawDate = drawDate.trim();
             const drawDetails = await page.evaluateHandle(el => el.nextElementSibling, drawHeader);
-            const drawDetailsText = await (await drawDetails.getProperty('innerHTML')).jsonValue() as string;
+            if(drawDetails.asElement() === null) {
+                return;
+                // An info bulleting like August 19, 2024
+                logger.warn(`Skipping ${drawDate} as it is an info bulletin`);
+            }
+            const drawInnerHTML = await drawDetails.getProperty('innerHTML');
+            const drawDetailsText = await (drawInnerHTML).jsonValue() as string;
 
             if (!draws.has(drawDate)) {
                 draws.add(drawDate);
                 drawsMap[drawDate] = drawDetailsText
             }
         }))
-    } finally {
+    } catch (error) {
+        logger.error(`Error fetching OINP draws: ${error}`);
+    } 
+    finally {
         browser.close();
     }
 
@@ -74,4 +83,4 @@ export const getDrawsFromOINP = async (): Promise<OINPDraws> => {
 }
 
 // Uncomment to test, otherwise this file is used as a module
-// getDrawsFromOINP()
+getDrawsFromOINP()
