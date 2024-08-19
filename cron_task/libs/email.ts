@@ -30,7 +30,9 @@ export const sendEmail = async (
   try {
     emailDone = await resend.emails.send({
       from: "noreply@send.knnect.com",
-      to,
+      to: "tmkasun+canpr@gmail.com",
+      reply_to: "tmkasun+canpr@gmail.com",
+      bcc: to,
       subject,
       html,
     });
