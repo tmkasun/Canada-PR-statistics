@@ -7,18 +7,19 @@ import { QueryClient, QueryClientProvider } from "react-query";
 const queryClient = new QueryClient();
 
 const CanPR: AppType = ({ Component, pageProps: { ...pageProps } }) => {
-
-    return (
-        <QueryClientProvider client={queryClient}>
-            <Layout>
-                <Head>
-                    <link rel="shortcut icon" href="https://open.canada.ca/GCWeb/assets/favicon.ico" />
-                </Head>
-                <Component {...pageProps} />
-            </Layout>
-        </QueryClientProvider>
-    );
-
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Layout>
+        <Head>
+          <link
+            rel="shortcut icon"
+            href="https://open.canada.ca/GCWeb/assets/favicon.ico"
+          />
+        </Head>
+        <Component {...pageProps} />
+      </Layout>
+    </QueryClientProvider>
+  );
 };
 
 export default CanPR;

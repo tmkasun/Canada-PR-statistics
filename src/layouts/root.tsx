@@ -5,32 +5,38 @@ import Script from "next/script";
 const figtree = Figtree({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Canada PR Stats",
-    description: "Visualize Canadian PR statistics using the live IRCC data API.",
+  title: "Canada PR Stats",
+  description: "Visualize Canadian PR statistics using the live IRCC data API.",
 };
 
 export default function RootLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-    return (
-        <>
-            <Script async src="https://www.googletagmanager.com/gtag/js?id=G-K48WB539H5" />
-            <Script id="google-analytics">
-                {
-                    `
+  return (
+    <>
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-K48WB539H5"
+      />
+      <Script id="google-analytics">
+        {`
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
                   
                     gtag('config', 'G-K48WB539H5');
-        `
-                }
-            </Script>
-            <div className={`grow flex flex-col ${figtree.className}`}>
-                {children}
-            </div>
-        </>
-    );
+        `}
+      </Script>
+      {/* Cloudflare css links are in _document  */}
+      <Script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+        defer
+      ></Script>
+      <div className={`grow flex flex-col ${figtree.className}`}>
+        {children}
+      </div>
+    </>
+  );
 }

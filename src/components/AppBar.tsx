@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import SubscriptionPopup from "./Subscribe";
 
 export const IconExternalLink = () => (
     <svg className="w-3 h-3 text-gray-950 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
@@ -24,7 +25,7 @@ export default function AppBar({ children }: { children?: React.ReactNode }) {
             {children}
 
             <div className="sm:flex hidden sm:visible gap-x-8 justify-center items-center">
-                <button onClick={() => alert("Coming soon!")} className="border-b-2  shadow-red-100 hover:shadow-md hover:bg-red-300 hover:border-red-400 shadow-sm rounded-lg bg-red-200 border-red-300 p-4">Subscribe</button>
+                <SubscriptionPopup />
                 {/* Action buttons */}
                 <a target="_blank" className={"text-blue-600 flex justify-center items-center gap-x-1 hover:text-blue-500"}
                     href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/mandate/policies-operational-instructions-agreements/ministerial-instructions/express-entry-rounds.html#wb-auto-4"
