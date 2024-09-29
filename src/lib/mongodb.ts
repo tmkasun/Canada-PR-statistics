@@ -9,6 +9,7 @@ const options = {};
 
 let client;
 let clientPromise: Promise<MongoClient>;
+// let cachedClient: MongoClient | null = null;
 
 if (process.env.NODE_ENV === "development") {
   // In development mode, use a global variable so that the value
@@ -32,7 +33,7 @@ if (process.env.NODE_ENV === "development") {
 // separate module, the client can be shared across functions.
 export default clientPromise;
 
-export const getCollection = async (collectionName = "Subscriptions") => {
+export const getCollection = async (collectionName = "subscriptions") => {
   const client = await clientPromise;
   const db = await client.db("canada");
   const collection = await db.collection(collectionName);

@@ -23,7 +23,7 @@
         "~/*": ["./src/*"]
       }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/pages/api/subscriptions"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/pages/api/subscribe"],
     "exclude": ["node_modules", "cron_task"]
   }
   

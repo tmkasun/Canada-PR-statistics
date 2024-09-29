@@ -1,16 +1,48 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useMutation } from "react-query";
 
 declare global {
   interface Window {
     turnstile: any;
   }
 }
+const postSubscription = async (subscriptionData: {
+  email: string;
+  token: string;
+  subscriptions: string[];
+}) => {
+  const response = await fetch("/api/subscribe", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(subscriptionData),
+  });
+
+  if (!response.ok) {
+    const errorResponse = await response.json();
+    throw new Error(errorResponse.error);
+  }
+
+  return response.json();
+};
 
 export default function SubscriptionPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [cfToken, setCfToken] = useState(null);
+
+  const { mutate, error, isError } = useMutation(postSubscription, {
+    onSuccess: (data) => {
+      console.log("Subscription successful", data);
+      //   showNotification("Subscription successful!", "success");
+      setIsOpen(false);
+    },
+  });
+
   const [email, setEmail] = useState("");
-  const [subscriptions, setSubscriptions] = useState<{[key: string]: boolean}>({
+  const [subscriptions, setSubscriptions] = useState<{
+    [key: string]: boolean;
+  }>({
     expressEntry: true,
     oinp: true,
     bcPnp: true,
@@ -27,6 +59,11 @@ export default function SubscriptionPopup() {
         },
         "error-callback": (error: any) => {
           console.error("Turnstile error:", error);
+          setCfToken(null);
+        },
+        "expired-callback": () => {
+          console.error("Turnstile token expired");
+          setCfToken(null);
         },
       });
     }
@@ -60,18 +97,20 @@ export default function SubscriptionPopup() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    // Here you would handle the subscription logic
-    console.log("Subscribing with email:", email);
-    console.log("Subscriptions:", subscriptions);
-    // You would also verify the Turnstile token here
-    if (turnstileRef.current) {
-    //   const token = turnstileRef.current?.getResponse();
-      debugger;
-      //   console.log('Turnstile token:', token);
+    if (cfToken) {
+      mutate({
+        email,
+        token: cfToken,
+        subscriptions: Object.keys(subscriptions).filter(
+          (key) => subscriptions[key]
+        ),
+      });
     }
-    setIsOpen(false);
   };
-
+  const isNotSelected = Object.values(subscriptions).every(
+    (value) => value === false
+  );
+  const isDisabled = isNotSelected || !email || !cfToken;
   return (
     <div className="p-4">
       <button
@@ -156,6 +195,13 @@ export default function SubscriptionPopup() {
                   </div>
                 ))}
               </div>
+              {/* https://developers.cloudflare.com/turnstile/troubleshooting/testing/
+                1x00000000000000000000AA	Always passes	visible
+                2x00000000000000000000AB	Always blocks	visible
+                1x00000000000000000000BB	Always passes	invisible
+                2x00000000000000000000BB	Always blocks	invisible
+                3x00000000000000000000FF	Forces an interactive challenge	visible
+              */}
               <div
                 ref={turnstileRef}
                 className="cf-turnstile"
@@ -164,14 +210,15 @@ export default function SubscriptionPopup() {
                 data-theme="light"
               />
               <button
-                disabled={!cfToken}
+                disabled={isDisabled}
                 type="submit"
                 className={`w-full ${
-                  !cfToken ? "bg-gray-500" : "bg-blue-500"
-                } hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
+                  isDisabled ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-700"
+                }  text-white font-bold py-2 px-4 rounded`}
               >
                 Subscribe
               </button>
+              {isError && <div className="text-red-500">{`${error}`}</div>}
             </form>
           </div>
         </div>
