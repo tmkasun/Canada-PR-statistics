@@ -32,6 +32,7 @@ async function validateTurnstileToken(
   return data.success;
 }
 
+export const sendVerificationEmail = async (email: string, uuid: string) => {};
 export interface INewSubscription {
   email: string;
   canpr: {
@@ -107,6 +108,7 @@ export default async function handler(
   }
   try {
     const response = await collection.insertOne(newSubscription);
+    // Need to send verification email
     return res
       .status(200)
       .json({ error: "Subscription added successful, Pending verification!" });

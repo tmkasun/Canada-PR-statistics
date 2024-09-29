@@ -117,14 +117,14 @@ export default function SubscriptionPopup() {
         onClick={() => setIsOpen(true)}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        Subscribe
+        Get Notified
       </button>
 
       {isOpen && (
         <div className="fixed z-10 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Get Notified</h2>
+              <h2 className="text-xl font-bold">Subscribe</h2>
               <button
                 onClick={() => setIsOpen(false)}
                 className="text-gray-500 hover:text-gray-700"
