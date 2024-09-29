@@ -1,6 +1,7 @@
 import { randomUUID } from "crypto";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getCollection } from "~/lib/mongodb";
+import { validateEmail } from "~/utils/utils";
 
 const CF_SECRET_KEY = process.env.CF_SECRET_KEY || "";
 
@@ -60,6 +61,9 @@ export default async function handler(
   const { email, token, subscriptions } = req.body;
   if (!email || !token) {
     return res.status(400).json({ error: "Email and token are required" });
+  }
+  if (!validateEmail(email)) {
+    return res.status(400).json({ error: "Invalid email" });
   }
   const ip = req?.headers["x-forwarded-for"];
   const isValidToken = await validateTurnstileToken(token, ip as string);
