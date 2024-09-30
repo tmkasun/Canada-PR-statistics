@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useMutation } from "react-query";
 import Spinner from "./Spinner";
+import SubscriptionSuccessMessage from "./SubscriptionConfirmation";
 
 let SITE_KEY = "0x4AAAAAAAqMFdMafq55TWNv";
 if (process.env.NODE_ENV === "development") {
@@ -39,17 +40,11 @@ const postSubscription = async (subscriptionData: {
   return response.json();
 };
 
-export default function SubscriptionPopup() {
-  const [isOpen, setIsOpen] = useState(false);
+export function SubscriptionPopup({ onClose }: { onClose: () => void }) {
   const [cfToken, setCfToken] = useState(null);
 
-  const { mutate, error, isError, isLoading } = useMutation(postSubscription, {
-    onSuccess: (data) => {
-      console.log("Subscription successful", data);
-      //   showNotification("Subscription successful!", "success");
-      setIsOpen(false);
-    },
-  });
+  const { mutate, error, isError, isLoading, isSuccess } =
+    useMutation(postSubscription);
 
   const [email, setEmail] = useState("");
   const [subscriptions, setSubscriptions] = useState<{
@@ -63,7 +58,7 @@ export default function SubscriptionPopup() {
   const turnstileRef = useRef(null);
   useEffect(() => {
     let widgetId: null | string = null;
-    if (typeof window !== "undefined" && window.turnstile && isOpen) {
+    if (typeof window !== "undefined" && window.turnstile) {
       widgetId = window.turnstile.render(turnstileRef.current, {
         callback: (token: any) => {
           setCfToken(token);
@@ -87,7 +82,7 @@ export default function SubscriptionPopup() {
         }
       }
     };
-  }, [isOpen]);
+  }, []);
 
   const handleSubscriptionChange = (event: any) => {
     const { name, checked } = event.target;
@@ -123,118 +118,129 @@ export default function SubscriptionPopup() {
     (value) => value === false
   );
   const isDisabled = isNotSelected || !email || !cfToken;
+
   return (
-    <div className="p-4">
-      <button
-        onClick={() => setIsOpen(true)}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Get Notified
-      </button>
-
-      {isOpen && (
-        <div className="fixed z-10 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Subscribe</h2>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="text-gray-500 hover:text-gray-700"
+    <div className="fixed z-10 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      {isSuccess ? (
+        <SubscriptionSuccessMessage onClose={onClose} email={email} />
+      ) : (
+        <div className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold">Subscribe</h2>
+            <button
+              onClick={onClose}
+              className="text-gray-500 hover:text-gray-700"
+            >
+              <svg
+                className="w-6 h-6 text-gray-500"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  className="w-6 h-6 text-gray-500"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18 17.94 6M18 18 6.06 6"
-                  />
-                </svg>
-              </button>
-            </div>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Email address
-                </label>
-                <input
-                  placeholder="example@sample.com"
-                  autoFocus
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18 17.94 6M18 18 6.06 6"
                 />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Subscribe to:
-                </label>
-                {Object.entries({
-                  all: "All",
-                  expressEntry: "Express Entry Draws",
-                  oinp: "OINP Draws",
-                  bcPnp: "BC PNP Draws",
-                }).map(([key, label]) => (
-                  <div key={key} className="flex items-center">
-                    <input
-                      type="checkbox"
-                      id={key}
-                      name={key}
-                      checked={subscriptions[key]}
-                      onChange={handleSubscriptionChange}
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                    />
-                    <label
-                      htmlFor={key}
-                      className="ml-2 block text-sm text-gray-900"
-                    >
-                      {label}
-                    </label>
-                  </div>
-                ))}
-              </div>
-
-              <div
-                ref={turnstileRef}
-                className="cf-turnstile"
-                data-sitekey={SITE_KEY}
-                data-callback="javascriptCallback"
-                data-theme="light"
-              />
-              <button
-                disabled={isDisabled}
-                type="submit"
-                className={`w-full ${
-                  isDisabled ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-700"
-                }  text-white font-bold py-2 px-4 rounded`}
-              >
-                {isLoading ? (
-                  <>
-                    <Spinner>Subscribing...</Spinner>
-                  </>
-                ) : (
-                  "Subscribe"
-                )}
-              </button>
-              {isError && <div className="text-red-500">{`${error}`}</div>}
-            </form>
+              </svg>
+            </button>
           </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Email address
+              </label>
+              <input
+                placeholder="example@sample.com"
+                autoFocus
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
+                Subscribe to:
+              </label>
+              {Object.entries({
+                all: "All",
+                expressEntry: "Express Entry Draws",
+                oinp: "OINP Draws",
+                bcPnp: "BC PNP Draws",
+              }).map(([key, label]) => (
+                <div key={key} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id={key}
+                    name={key}
+                    checked={subscriptions[key]}
+                    onChange={handleSubscriptionChange}
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label
+                    htmlFor={key}
+                    className="ml-2 block text-sm text-gray-900"
+                  >
+                    {label}
+                  </label>
+                </div>
+              ))}
+            </div>
+
+            <div
+              ref={turnstileRef}
+              className="cf-turnstile"
+              data-sitekey={SITE_KEY}
+              data-callback="javascriptCallback"
+              data-theme="light"
+            />
+            <button
+              disabled={isDisabled}
+              type="submit"
+              className={`w-full ${
+                isDisabled ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-700"
+              }  text-white font-bold py-2 px-4 rounded`}
+            >
+              {isLoading ? (
+                <>
+                  <Spinner>Subscribing...</Spinner>
+                </>
+              ) : (
+                "Subscribe"
+              )}
+            </button>
+            {isError && <div className="text-red-500">{`${error}`}</div>}
+          </form>
         </div>
       )}
     </div>
+  );
+}
+
+export default function Subscription() {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <>
+      <div className="p-4">
+        <button
+          onClick={() => setIsOpen(true)}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Get Notified
+        </button>
+      </div>
+      {isOpen && <SubscriptionPopup onClose={() => setIsOpen(false)} />}
+    </>
   );
 }

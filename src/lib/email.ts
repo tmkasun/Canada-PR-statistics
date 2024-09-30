@@ -3,6 +3,7 @@ import { JSDOM } from "jsdom";
 const path = require("path");
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
+let isDev = process.env.NODE_ENV === "development";
 
 let resendInstance: Resend | null = null;
 const initResend = (): Resend => {
@@ -24,7 +25,7 @@ export const sendEmail = async (
   try {
     emailDone = await resend.emails.send({
       from: "noreply@send.knnect.com",
-      to,
+      to: isDev ? "delivered@resend.dev" : to,
       replyTo: "tmkasun+canprsubs@gmail.com",
       subject,
       html,
@@ -54,7 +55,7 @@ export const sendVerificationEmail = async (email: string, uuid: string) => {
   const emailDone = await sendEmail(
     email,
     emailTemplate.serialize(),
-    "CanPR Subscription Verification"
+    "CanPR email verification"
   );
   return emailDone;
 };
