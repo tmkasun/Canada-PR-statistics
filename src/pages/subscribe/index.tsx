@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import AppBar from "~/components/AppBar";
 import { getCollection } from "~/lib/mongodb";
 
-const SubscribePage = (props) => {
+const SubscribePage = (props: any) => {
   const { item, notFound } = props;
   const location = useRouter();
   const { query } = location;

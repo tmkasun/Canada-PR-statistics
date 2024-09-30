@@ -40,7 +40,9 @@ const filePath = path.join(process.cwd(), "/src/utils/verificationEmail.html");
 
 export const sendVerificationEmail = async (email: string, uuid: string) => {
   const emailTemplate = await JSDOM.fromFile(filePath);
-  const verificationEndpoint = `https://canpr.knnect.com/subscribe?email=${encodeURIComponent(email)}&code=${uuid}`;
+  const verificationEndpoint = `https://canpr.knnect.com/subscribe?email=${encodeURIComponent(
+    email
+  )}&code=${uuid}`;
   const verifyUrl = emailTemplate.window.document.querySelector("#verifyUrl");
   if (verifyUrl) {
     verifyUrl.innerHTML = verificationEndpoint;
@@ -52,7 +54,7 @@ export const sendVerificationEmail = async (email: string, uuid: string) => {
   const emailDone = await sendEmail(
     email,
     emailTemplate.serialize(),
-    `CanPR Subscription Verification`
+    "CanPR Subscription Verification"
   );
   return emailDone;
 };
