@@ -1,9 +1,18 @@
 import { randomUUID } from "crypto";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { sendVerificationEmail } from "~/lib/email";
 import { getCollection } from "~/lib/mongodb";
 import { validateEmail } from "~/utils/utils";
 
-const CF_SECRET_KEY = process.env.CF_SECRET_KEY || "";
+let CF_SECRET_KEY = process.env.CF_SECRET_KEY || "";
+if (process.env.NODE_ENV === "development") {
+  /** 
+    1x0000000000000000000000000000000AA	Always passes
+    2x0000000000000000000000000000000AA	Always fails
+    3x0000000000000000000000000000000AA	Yields a “token already spent” error
+    */
+  CF_SECRET_KEY = "1x0000000000000000000000000000000AA";
+}
 
 if (!CF_SECRET_KEY) {
   throw new Error(
@@ -32,7 +41,6 @@ async function validateTurnstileToken(
   return data.success;
 }
 
-export const sendVerificationEmail = async (email: string, uuid: string) => {};
 export interface INewSubscription {
   email: string;
   canpr: {
@@ -109,6 +117,10 @@ export default async function handler(
   try {
     const response = await collection.insertOne(newSubscription);
     // Need to send verification email
+    const emailSent = await sendVerificationEmail(email, newSubscription.canpr.uuid);
+    if (emailSent?.error) {
+      return res.status(500).json({ error: "Error sending verification email" });
+    }
     return res
       .status(200)
       .json({ error: "Subscription added successful, Pending verification!" });

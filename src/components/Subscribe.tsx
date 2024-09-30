@@ -1,6 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useMutation } from "react-query";
+import Spinner from "./Spinner";
 
+let SITE_KEY = "0x4AAAAAAAqMFdMafq55TWNv";
+if (process.env.NODE_ENV === "development") {
+  /* https://developers.cloudflare.com/turnstile/troubleshooting/testing/
+                1x00000000000000000000AA	Always passes	visible
+                2x00000000000000000000AB	Always blocks	visible
+                1x00000000000000000000BB	Always passes	invisible
+                2x00000000000000000000BB	Always blocks	invisible
+                3x00000000000000000000FF	Forces an interactive challenge	visible
+              */
+  SITE_KEY = "1x00000000000000000000AA";
+}
 declare global {
   interface Window {
     turnstile: any;
@@ -31,7 +43,7 @@ export default function SubscriptionPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [cfToken, setCfToken] = useState(null);
 
-  const { mutate, error, isError } = useMutation(postSubscription, {
+  const { mutate, error, isError, isLoading } = useMutation(postSubscription, {
     onSuccess: (data) => {
       console.log("Subscription successful", data);
       //   showNotification("Subscription successful!", "success");
@@ -195,17 +207,11 @@ export default function SubscriptionPopup() {
                   </div>
                 ))}
               </div>
-              {/* https://developers.cloudflare.com/turnstile/troubleshooting/testing/
-                1x00000000000000000000AA	Always passes	visible
-                2x00000000000000000000AB	Always blocks	visible
-                1x00000000000000000000BB	Always passes	invisible
-                2x00000000000000000000BB	Always blocks	invisible
-                3x00000000000000000000FF	Forces an interactive challenge	visible
-              */}
+
               <div
                 ref={turnstileRef}
                 className="cf-turnstile"
-                data-sitekey="0x4AAAAAAAqMFdMafq55TWNv"
+                data-sitekey={SITE_KEY}
                 data-callback="javascriptCallback"
                 data-theme="light"
               />
@@ -216,7 +222,13 @@ export default function SubscriptionPopup() {
                   isDisabled ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-700"
                 }  text-white font-bold py-2 px-4 rounded`}
               >
-                Subscribe
+                {isLoading ? (
+                  <>
+                    <Spinner>Subscribing...</Spinner>
+                  </>
+                ) : (
+                  "Subscribe"
+                )}
               </button>
               {isError && <div className="text-red-500">{`${error}`}</div>}
             </form>
