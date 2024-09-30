@@ -51,7 +51,7 @@ const SubscriptionSuccessMessage = ({
           Subscription Successful!
         </h2>
         <p className="mt-2 text-sm text-gray-600">
-          Thank you for subscribing. We've sent a verification email to:
+          {"Thank you for subscribing. We've sent a verification email to:"}
         </p>
         <p className="mt-1 text-lg font-medium text-blue-600">{email}</p>
       </div>
@@ -72,7 +72,7 @@ const SubscriptionSuccessMessage = ({
 
       <div className="mt-6">
         <p className="text-center text-sm text-gray-500">
-          Didn't receive the email? Check your spam folder or{" "}
+          {"Didn't receive the email? Check your spam folder or "}
           <button
             disabled
             className="font-medium text-blue-600 hover:text-blue-500"
