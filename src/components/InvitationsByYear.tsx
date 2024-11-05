@@ -14,8 +14,6 @@ import { CanvasRenderer } from "echarts/renderers";
 import { ECharts, EChartsType } from "echarts";
 import { IRound } from "~/data/consts";
 
-
-
 echarts.use([
   TitleComponent,
   DatasetComponent,
@@ -84,7 +82,7 @@ const InvitationsByYear = (props: { id: string; rounds?: IRound[] }) => {
         if (availableProgramsThisYear.includes(programName)) {
           programData.data.push(yearSummary[programName].drawSize);
         } else {
-          programData.data.push('-');
+          programData.data.push("-");
         }
       }
     }
