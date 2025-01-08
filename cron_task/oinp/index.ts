@@ -5,7 +5,7 @@ import logger from '../libs/logger';
 import { Collection } from 'mongodb';
 
 // Change the URL when year changes
-const pUpdates2023 = "https://www.ontario.ca/page/2024-ontario-immigrant-nominee-program-updates";
+const pUpdates2025 = "https://www.ontario.ca/page/2025-ontario-immigrant-nominee-program-updates";
 const noi = "https://www.ontario.ca/page/oinp-express-entry-notifications-interest";
 
 export type OINPDraw = { date: Date, details: string }
@@ -48,7 +48,7 @@ export const getDrawsFromOINP = async (): Promise<OINPDraws> => {
     try {
         const page = await browser.newPage();
         // Visit the page and wait until network connections are completed
-        await page.goto(pUpdates2023, { waitUntil: 'networkidle2' });
+        await page.goto(pUpdates2025, { waitUntil: 'networkidle2' });
         const drawHeaders = await page.$$('h3');
 
         await Promise.all(drawHeaders?.map(async (drawHeader) => {
