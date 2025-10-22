@@ -94,7 +94,7 @@ const getLatestDrawFromDB = async (
       mongoCollection,
       latestOINPFromWeb.date
     );
-
+    logger.info(`Latest OINP invitation round from web: ${latestOINPFromWeb}`);
     if (latestOINPFromWeb.date > latestOINPFromDB.lastDraw) {
       logger.info(
         `Found a new OINP invitation round from web: ${latestOINPFromWeb}`
