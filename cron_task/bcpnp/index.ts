@@ -20,9 +20,9 @@ const itaPage =
 const mockFile = path.join(__dirname, "../resources/testing/mock.bcpnp.html");
 
 export const getDrawsFromBCPNP = async (): Promise<any[]> => {
-//   const dom = await JSDOM.fromFile(mockFile);
+  //   const dom = await JSDOM.fromFile(mockFile);
   // uncomment this line to fetch from the website
-    const dom = await JSDOM.fromURL(itaPage);
+  const dom = await JSDOM.fromURL(itaPage);
   const { window } = dom;
   const { document } = window;
   const matrix = toMatrix(document.querySelector("table"));
