@@ -45,7 +45,7 @@ const getLatestDrawFromDB = async (
 (async () => {
   const mongoCollection = await initMongo();
   try {
-    logger.info(`Checking BCPNP invitations!`);
+    logger.info(`============== Checking BCPNP invitations ==============`);
     const [latestBCPNPListFromWeb] = await getDrawsFromBCPNP();
     const [latestBCPNPFromWeb] = latestBCPNPListFromWeb;
     const latestBCPNPFromDB = await getLatestBCPNPFromDB(
@@ -69,6 +69,7 @@ const getLatestDrawFromDB = async (
     } else {
       logger.info(`No new BC PNP invitations found!`);
     }
+    logger.info(`============== Checking IRCC draws ==============`);
     const latestDrawFromIRCC = await getLatestDrawFromIRCC();
     const latestDrawNumberFromIRCC = parseInt(latestDrawFromIRCC.drawNumber);
     const latestDrawFromDB = await getLatestDrawFromDB(
@@ -87,7 +88,7 @@ const getLatestDrawFromDB = async (
     } else {
       logger.info("No new draws!");
     }
-    logger.info(`Checking OINP invitations!`);
+    logger.info(`============== Checking OINP invitations ==============`);
     const latestsOINPsfromOntarioCa = await getDrawsFromOINP();
     const [latestOINPFromWeb] = latestsOINPsfromOntarioCa;
     const latestOINPFromDB = await getLatestOINPFromDB(
